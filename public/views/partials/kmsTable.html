@@ -1,0 +1,84 @@
+﻿<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <img class="img-thumbnail" src="img/logo.png" alt="">Tableau de bord
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-table"></i> Tableau de bord des Frais kilométriques
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label for="gite">Gîte / Chambre d'hôte : </label>
+            <select name="gite" ng-model="selectedGite" ng-hide="isLoadingAccomodations" class="form-control" id="gite" ng-change="displayKms()"
+                    ng-options="(accomodation.name +'  '+ accomodation.city +'-'+ accomodation.country) for accomodation in accomodationList track by accomodation._id">
+                <option value="" selected>Tous les Gîtes / Chambres d'hôtes ..</option>
+            </select>
+            <div class="spinner-container-input" ng-show="isLoadingAccomodations"><span us-spinner spinner-theme="easy16i-input"></span></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-easy16i">
+                    <div class="panel-heading">
+                        <h3 class="text-center">
+                            <i class="fa fa-table"></i><span> Frais kilométriques pour l'année civile {{currentDate.year}}</span>
+                        </h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="alert alert-info">
+                            <i class="fa fa-info-circle"></i> Vous pouvez lancer les calculs de l'année civile <strong>{{currentDate.year}}</strong>, les données sera modifiable via les masques de saisie avant la validation de l'administrateur.
+                        </div>
+                        <div class="alert alert-warning" ng-if="!isScale">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-exclamation-triangle"></i><strong>Paramétre de Véhicules</strong> pour l'année civile {{currentDate.year}} ne sont pas configurés. Pour les configurer merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétre Des Taux Automobiles </a>
+                        </div>
+
+                        <div class="spinner-container-panel" ng-show="isLoadingKms"><span us-spinner spinner-theme="easy16i-panel"></span></div>
+
+                        <div ng-if="dashboard !== undefined" class="table-responsive" ng-hide="isLoadingKms">
+                            <table id="table1" class="table table-bordered table-hover table-striped table-easy16i-dashboard">
+                                <thead>
+                                    <tr>
+                                        <th>{{currentDate.year}}</th>
+                                        <th>Description</th>
+                                        <th>Kms</th>
+                                        <th>Taux</th>
+                                        <th>Montant</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ligne in dashboard">
+                                        <td>{{ligne.mois | capitalize}}</td>
+                                        <td>{{ligne.libelle}}</td>
+                                        <td>{{ligne.kms}}</td>
+                                        <td>{{ligne.taux}}</td>
+                                        <td>{{ligne.montant | currency}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-link pull-right" ng-if="dashboard !== undefined" ng-click="exportToExcel('#table1')">
+                            <span class="glyphicon glyphicon-share"></span> Exporter vers Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

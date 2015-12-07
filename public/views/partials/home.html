@@ -1,0 +1,74 @@
+﻿<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <img class="img-thumbnail" src="img/logo.png" alt="">Bienvenue
+                    <small>sur le portail Easy16i Comptable</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i> Synthése
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="col-lg-12">
+                <div class="spinner-container-panel" ng-show="isLoadingBankStatements || isLoadingScales"><span us-spinner spinner-theme="easy16i-panel"></span></div>
+
+                <div class="alert alert-warning" ng-if="!isScale" ng-hide="isLoadingBankStatements || isLoadingScales">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="fa fa-exclamation-circle"></i>  <strong>Paramétres des Véhicules</strong> pour l'année civile {{currentDate.year}} ne sont pas configurés. Pour les configurer merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétres Des Taux Automobiles </a>
+                </div>
+                <div class="alert alert-success" ng-if="isScale" ng-hide="isLoadingBankStatements || isLoadingScales">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="fa fa-hand-peace-o"></i>  <strong>Paramétres des Véhicules</strong> pour l'année civile {{currentDate.year}} sont déjà configurés. Pour modifier les barèmes merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétres Des Taux Automobiles </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6" ng-repeat="var in synthesis" ng-hide="isLoadingBankStatements || isLoadingScales">
+                    <div class="panel panel-{{var.color}}">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{var.month | capitalize}}</div>
+                                    <div>{{var.etat}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#{{config.routes.bankStatement.RouteUrl}}" ng-if="var.statut !== undefined" ng-click="setMonth($index+1)">
+                            <div class="panel-footer">
+                                <span class="pull-left">Relevé Bancaire</span>
+                                <span class="pull-right"><i ng-if="var.statut >= 0" class="fa fa-check-circle"></i><i ng-if="var.statut === -1" class="fa fa-times-circle"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                        <a href="#{{config.routes.recipe.RouteUrl}}" ng-if="var.statut !== undefined" ng-click="setMonth($index+1)">
+                            <div class="panel-footer">
+                                <span class="pull-left">Rapprochement Recettes</span>
+                                <span class="pull-right"><i ng-if="var.statut >= 1" class="fa fa-check-circle"></i><i ng-if="var.statut < 1" class="fa fa-times-circle"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                        <a href="#{{config.routes.spending.RouteUrl}}" ng-if="var.statut !== undefined" ng-click="setMonth($index+1)">
+                            <div class="panel-footer">
+                                <span class="pull-left">Rapprochement Dépenses</span>
+                                <span class="pull-right"><i ng-if="var.statut >= 2" class="fa fa-check-circle"></i><i ng-if="var.statut < 2" class="fa fa-times-circle"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+         
+            </div>
+
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
