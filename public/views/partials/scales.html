@@ -1,0 +1,224 @@
+﻿
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    <img class="img-thumbnail" src="img/logo.png" alt="">Gestion des barèmes Kms pour l'année civile {{currentDate.year}}
+=======
+                    Gestion des Baremes Kms Par Année civile ({{currentDate.year}})
+>>>>>>> origin/master
+=======
+                    Gestion des Baremes Kms Par Année civile ({{currentDate.year}})
+>>>>>>> origin/master
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
+                    </li>
+                    <li>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                        <i class="fa fa-table"></i> Traitement des taux par %
+=======
+                        <i class="fa fa-table"></i> Traitement des Taux par %
+>>>>>>> origin/master
+=======
+                        <i class="fa fa-table"></i> Traitement des Taux par %
+>>>>>>> origin/master
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-easy16i">
+                    <div class="panel-heading">
+                        <h3 class="text-center">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            <i class="fa fa-database"></i><span>Liste des taux par véhicules</span>
+=======
+                            <i class="fa fa-users"></i><span>Liste des Taux par véhicules</span>
+>>>>>>> origin/master
+=======
+                            <i class="fa fa-users"></i><span>Liste des Taux par véhicules</span>
+>>>>>>> origin/master
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            <label>Type de véhicule :</label>
+=======
+                            <label>Type de véchule :</label>
+>>>>>>> origin/master
+=======
+                            <label>Type de véchule :</label>
+>>>>>>> origin/master
+                            <div class="radio">
+                                <label class="radio-inline" ng-repeat="type in paramlist.availableOptions">
+                                    <input type="radio" name="radiobutton" ng-click="displayedIntervalList()" ng-model="paramlist.selectedOption" ng-value="type">{{type.name}}
+                                </label>
+                            </div>
+                        </div>
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+                        <div class="alert alert-warning" ng-if="!isScaleFull" ng-hide="isLoadingScales">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-exclamation-circle"></i>  <strong>Paramétres de {{paramlist.selectedOption.name}}</strong> pour l'année civile {{currentDate.year}} ne sont pas configurés. Merci de <span ng-if="!isAdmin">demander a votre administrateur de </span>terminer la configuration des barèmes en cours.
+                        </div>
+                        <div class="alert alert-success" ng-if="isScaleFull" ng-hide="isLoadingScales">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-check-circle"></i>  <strong>Paramétres de {{paramlist.selectedOption.name}}</strong> pour l'année civile {{currentDate.year}} sont déjà configurés. <span ng-if="isAdmin">Vous pouvez modifier les taux des barèmes kilométriques à tout moment.</span><span ng-if="!isAdmin">Pour les modifier merci de faire une demande à votre administrateur.</span>
+=======
+=======
+>>>>>>> origin/master
+                        <div class="alert alert-warning" ng-if="!isScaleFull">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-exclamation-triangle"></i>  <strong>Paramétre de {{paramlist.selectedOption.name}}</strong> Pour l'année civile {{currentDate.year}} n'est pas configuré. Vous pouvez modifier les taux du barème kilométrique à tout moment.
+                        </div>
+                        <div class="alert alert-success" ng-if="isScaleFull">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-hand-peace-o"></i>  <strong>Paramétre de {{paramlist.selectedOption.name}}</strong> Pour l'année civile {{currentDate.year}} est configuré. Merci de terminer la configuration du Baremes en cours.
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                <div class="spinner-container-panel" ng-show="isLoadingScales"><span us-spinner spinner-theme="easy16i-panel"></span></div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped" ng-hide="isLoadingScales">
+=======
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+>>>>>>> origin/master
+=======
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+>>>>>>> origin/master
+                                        <thead>
+                                            <tr>
+                                                <th>Puissance Fiscale</th>
+                                                <th>Moins de {{paramlist.selectedOption.t1}} km</th>
+                                                <th>{{paramlist.selectedOption.t1 + 1}} à {{paramlist.selectedOption.t2}} km</th>
+                                                <th>plus de {{paramlist.selectedOption.t2}} km</th>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                                <th ng-if="isAdmin"></th>
+=======
+                                                <th></th>
+>>>>>>> origin/master
+=======
+                                                <th></th>
+>>>>>>> origin/master
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="param in intervalList" ng-class="{'success':param==selecteditem}">
+                                                <td>{{param.cv}}</td>
+                                                <td>{{param.interval.t1.rate}} x d</td>
+                                                <td>({{param.interval.t2.rate}} x d) + {{param.interval.t2.constant}}</td>
+                                                <td>{{param.interval.t3.rate}} x d</td>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                                <td ng-if="isAdmin">
+=======
+                                                <td>
+>>>>>>> origin/master
+=======
+                                                <td>
+>>>>>>> origin/master
+                                                    <div class="pull-right">
+                                                        <button type="button" ng-click="getScale(param)" class="btn btn-sm btn-info startEditBtn"><i class="fa fa-pencil-square-o"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                        <tfoot ng-if="isAdmin">
+=======
+                                        <tfoot>
+>>>>>>> origin/master
+=======
+                                        <tfoot>
+>>>>>>> origin/master
+                                            <tr>
+
+                                                <td>
+                                                    <!-- <input class="form-control" placeholder="Nombre de CV" ng-model="selecteditem.cv" disabled>-->
+
+                                                    <select name="role" ng-model="paramlist.selectedOption.value" class="form-control" id="role"
+                                                            ng-disabled="selecteditem._id" ng-options="value for value in paramlist.selectedOption.values">
+                                                        <option value="" disabled selected>Puissance Fiscale..</option>
+                                                    </select>
+
+
+                                                </td>
+                                                <td><input class="form-control" type="number" min="0" step="0.001" placeholder="Taux" ng-model="selecteditem.interval.t1.rate"></td>
+                                                <td class="col-lg-4">
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control" type="number" min="0" step="0.001" placeholder="Taux" ng-model="selecteditem.interval.t2.rate">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input class=" form-control" type="number" min="0" placeholder="Constante" ng-model="selecteditem.interval.t2.constant">
+                                                    </div>
+                                                </td>
+                                                <td><input class="form-control" type="number" min="0" step="0.001" placeholder="Taux" ng-model="selecteditem.interval.t3.rate"></td>
+                                                <td>
+                                                    <div class="pull-right">
+                                                        <button type="button" ng-click="updateScale({'type' : paramlist.selectedOption.name,'year' : currentDate.year,'cv' : paramlist.selectedOption.value,
+                                                                'interval' : {
+                                                                    't1' : {'from' : 0, 'to' : paramlist.selectedOption.t1 ,'rate' : selecteditem.interval.t1.rate, 'constant' : 0},
+                                                                    't2' : {'from' : paramlist.selectedOption.t1 + 1, 'to' : paramlist.selectedOption.t2 ,'rate' : selecteditem.interval.t2.rate, 'constant' : selecteditem.interval.t2.constant},
+                                                                    't3' : {'from' : paramlist.selectedOption.t2 + 1, 'to' : 999999,'rate' : selecteditem.interval.t3.rate, 'constant' : 0}
+                                                                }})"
+                                                                class="btn btn-sm btn-easy16i">
+                                                            Add/Update
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tfoot>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                        <div class="form-group pull-right" ng-hide="isLoadingScales" ng-if="isAdmin">
+                            <button type="button" class="btn btn-default" ng-click="clean()">Vider les champs</button>
+=======
+                        <div class="form-group pull-right">
+                            <button type="button" class="btn btn-default" ng-click="displayedIntervalList()">Vider les champs</button>
+>>>>>>> origin/master
+=======
+                        <div class="form-group pull-right">
+                            <button type="button" class="btn btn-default" ng-click="displayedIntervalList()">Vider les champs</button>
+>>>>>>> origin/master
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

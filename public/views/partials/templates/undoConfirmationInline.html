@@ -1,0 +1,11 @@
+﻿<div id="partials/templates/undoConfirmationInline.html">
+    <div class="text-center">
+        <div ng-hide="isUndoing" class="buttonPanel center-block">                 
+            <button type="button" class="btn btn-sm btn-info" ng-click="startUndo()"><i class="fa fa-undo"></i></button>           
+        </div>
+        <div ng-show="isUndoing" class="confirmPanel text-center">
+            <button type="button" class="btn btn-default btn-sm" ng-click="cancel()"> Annuler</button>
+            <button type="button" class="btn btn-info btn-sm" ng-click="confirm()"><i class="fa fa-undo"></i> Confirmer</button>
+        </div>
+    </div>
+</div>
