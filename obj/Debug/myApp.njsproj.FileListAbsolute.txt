@@ -1,2 +1,0 @@
-D:\Online_TFS_Workspace\Easy16i\Main\bin\Microsoft.NodejsTools.WebRole.dll
-D:\Online_TFS_Workspace\Easy16i\Main\obj\Debug\myApp.njsprojResolveAssemblyReference.cache
