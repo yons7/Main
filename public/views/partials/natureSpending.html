@@ -8,9 +8,6 @@
                     <img class="img-thumbnail" src="img/logo.png" alt="">Gestion des natures de dépenses
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
-                    </li>
                     <li>
                         <i class="fa fa-table"></i> Ajout des natures de dépenses
                     </li>
@@ -30,42 +27,25 @@
                     <div class="panel-body">
 
                         <form role="form" novalidate angular-validator name="natureSpendingCreationForm" angular-validator-submit="createUpdateNatureSpending({ 'name'        : this.natureName,
-                                                                                                                                                    'description' : this.desc,
-                                                                                                                                                    'min'         : this.min,
-                                                                                                                                                    'max'         : this.max})">
+                                                                                                                                                    'description' : this.desc})">
 
                             <div class="col-lg-6">
-
                                 <div class="form-group">
                                     <label for="natureName">Nom de la nature de dépense : </label>
                                     <input type="text" class="form-control" name="natureName" id="natureName" ng-model="natureName" placeholder="Saisir le nom de la nature de dépense.." size=50 required required-message="'{{validationMessages.requiredMessage}}'" validate-on="dirty">
                                 </div>
-
+                            </div>
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="desc">Description : </label>
-                                    <textarea class="form-control" name="desc" id="desc" ng-model="desc" placeholder="Saisir la description de la nature de dépense.." rows="5" maxlength="250" style="resize:none;"></textarea>
+                                    <textarea class="form-control" name="desc" id="desc" ng-model="desc" placeholder="Saisir la description de la nature de dépense.." rows="5" maxlength="300" style="resize:none;"></textarea>
                                 </div>
                             </div>
-
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="min">Prix minimal : </label>
-                                    <input type="number" class="form-control" name="min" id="min" ng-model="min" placeholder="Saisir la valeur minimal de la natrue de dépense ..">
+                                <div class="form-group pull-right">
+                                    <button type="submit" class="btn btn-easy16i">créer la nature de dépense</button>
+                                    <button type="button" class="btn btn-default" ng-click="reset()">Vider les champs</button>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="max">Prix maximal : </label>
-                                    <input type="number" class="form-control" name="max" id="max" ng-model="max" placeholder="Saisir la valeur maximal de la natrue de dépense..">
-                                </div>
-
-                            </div>
-
-                            <div class="form-group pull-right">
-                                <button type="submit" class="btn btn-easy16i">créer la natrue de dépense</button>
-                                <button type="button" class="btn btn-default" ng-click="reset()">Vider les champs</button>
-                            </div>
-                        </form>
+</form>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -76,9 +56,7 @@
                                         <tr>
                                             <th st-sort="nature.name">Nom</th>
                                             <th >Description</th>
-                                            <th st-sort="nature.min">Prix minimal</th>
-                                            <th st-sort="nature.max">Prix maximal</th>
-                                            <th st-sort="nature.deleted">Status</th>
+                                            <th st-sort="nature.deleted">Statut</th>
                                             <th st-sort="nature.created">Date de création</th>
                                             <th></th>
                                         </tr>
@@ -87,8 +65,6 @@
                                         <tr ng-repeat="nature in displayedNatureSpendingList" ng-class="nature.deleted === 1 ? 'ng-scope danger greyedOut' : 'ng-scope';">
                                             <td>{{nature.name}}</td>
                                             <td>{{nature.description}}</td>
-                                            <td>{{nature.min}}</td>
-                                            <td>{{nature.max}}</td>
                                             <td>{{nature.deleted === 1 ? "Désactivé":"Actif" }}</td>
                                             <td>{{nature.created | date}} {{nature.created.substring(11, 16)}}</td>
                                             <td>

@@ -21,6 +21,14 @@
                 $scope.isLoggingIn = false;
             });
         };
+        
+        
+        $scope.dialogHtml = {
+            title: 'Retrouvez votre compte',
+            body: 'Merci de fournir votre adresse, vous recevez votre mot de passe par email',
+            info: 'NB : Je ne peux pas identifier mon compte => contacter votre administrateur',
+            id : 'forgetPassword'
+        }  
 
         $scope.clearAuthError = function () { $scope.authError = false; };
     }

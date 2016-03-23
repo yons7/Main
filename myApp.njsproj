@@ -9,8 +9,8 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <NodeExeArguments>--debug=5678</NodeExeArguments>
-    <DebuggerPort>5678</DebuggerPort>
+    <NodeExeArguments>--debug=5858</NodeExeArguments>
+    <DebuggerPort>5858</DebuggerPort>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -121,6 +121,7 @@
     <Compile Include="services\userService.js" />
     <Content Include="public\css\app.css" />
     <Content Include="public\css\filter.css" />
+    <Content Include="public\img\favicon.ico" />
     <Content Include="public\img\logo.png" />
     <Content Include="public\libs\angular\angular-animate.min.js.map" />
     <Content Include="public\libs\angular\angular-resource.min.js.map" />
@@ -128,6 +129,7 @@
     <Content Include="public\libs\angular\angular-spinner.min.js.map" />
     <Content Include="public\libs\angular\angular.min.js.map" />
     <Content Include="public\libs\bootstrap\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="public\libs\bootstrap\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="public\libs\jquery\pnotify.custom.min.css" />
     <Content Include="public\libs\angular\smart-table.min.js.map" />
     <Content Include="public\libs\bootstrap\css\bootstrap-rtl.css" />

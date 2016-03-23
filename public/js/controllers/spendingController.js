@@ -14,8 +14,22 @@
     $scope.$on('DateChange', function (events, args) {
         $scope.num = undefined;
         $scope.getCurrentState();
-        $scope.listSpending();  
-    })
+        $scope.getCurrentDays();
+        $scope.listSpending();
+    });
+    
+    $scope.getCurrentDays = function () {
+        // Get number of days based on month + year 
+        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
+        var nbDays = new Date($rootScope.currentDate.year, $rootScope.currentDate.month, 0).getDate() || 31;
+        
+        $scope.daysList = [];
+        for (var i = 1; i <= nbDays; i++) {
+            var iS = i.toString();
+            $scope.daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
+        }
+    };
+    $scope.getCurrentDays();
     
     $scope.getCurrentState = function () {
         $scope.isLoadingCurrentState = true;
@@ -95,8 +109,10 @@
         this.spendingCreationForm.reset();
         generateNumPiece(); 
         $scope.selecteditem = undefined;
+        $scope.day = 1;
     }
     
+    $scope.day = 1;
     $scope.displayedSpendingList = [].concat($scope.spendingList);
     $scope.itemsByPage = 10;
     
@@ -120,6 +136,7 @@
                 if ($scope.redirectToMappingWhenDone)
                     window.location.href = '#' + config.routes.mapping.RouteUrl;
             }, function (err) {
+                generateNumPiece(); 
                 HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.add, err.data.errormessage);
             });
         }
@@ -155,6 +172,7 @@
         $scope.changePage();
         $scope.selecteditem = Object;
         $scope.num = $scope.selecteditem.num_justification;
+        $scope.dateachat = $scope.selecteditem.dateachat.substring(8, 10);
         $scope.montant = $scope.selecteditem.amount;
         $scope.paymentRadio.selectedOption.id = $scope.selecteditem.modePayment;
         $scope.spendRadio.selectedOption.id = $scope.selecteditem.spend;
@@ -166,7 +184,7 @@
             $scope.selectedNature = { 'name' : $scope.selecteditem.description.nature };
         } else {
             $scope.nomLoc = $scope.selecteditem.information.tenant_name;
-            $scope.date = new Date($scope.selecteditem.information.star_date.substring(0, 10));
+            $scope.day = $scope.selecteditem.information.star_date.substring(8, 10);
             $scope.periode = $scope.selecteditem.information.rental_time;
             $scope.motif = $scope.selecteditem.information.reason_rembourssement;
         }
@@ -175,7 +193,7 @@
     
     $scope.dialogHtml = {
         title: 'Validation de transfert des piéces justificatif des dépenses',
-        body: 'Vous étes sur de vouloir conserver la piéce justificatif jusqu à le mois prochaine ?',
+        body: 'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
         info: 'NB : cette opération est irréversible'
     }   
     

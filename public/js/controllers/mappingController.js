@@ -227,7 +227,7 @@
     
     $scope.dialogHtml = {
         title: 'Validation de transfert des piéces justificatif',
-        body: 'Vous étes sur de vouloir conserver la piéce justificatif jusqu à le mois prochaine ?',
+        body: 'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
         info: 'NB : cette opération est irréversible'
     };
     

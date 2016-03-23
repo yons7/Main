@@ -13,14 +13,28 @@
     
     $scope.$on('DateChange', function (events, args) {
         $scope.num = undefined;
+        $scope.getCurrentDays();
         $scope.listKm(); 
     })
     
-    $scope.paymentRadio = {
-        selectedOption: Ressources.modePayment[0],
-        availableOptions: Ressources.modePayment
+    $scope.getCurrentDays = function () {
+        // Get number of days based on month + year 
+        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
+        var nbDays = new Date($rootScope.currentDate.year, $rootScope.currentDate.month, 0).getDate() || 31;
+        
+        $scope.daysList = [];
+        for (var i = 1; i <= nbDays; i++) {
+            var iS = i.toString();
+            $scope.daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
+        }
     };
+    $scope.getCurrentDays();
     
+    $scope.trajetRadio = {
+        selectedOption: Ressources.typeTrajet[0],
+        availableOptions: Ressources.typeTrajet
+    };
+
     $scope.selecteditem = undefined;
     
     var compteurPiece = 1;
@@ -106,6 +120,7 @@
                 compteurPiece++;
                 generateNumPiece();   
             }, function (err) {
+                generateNumPiece(); 
                 HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.add, err.data.errormessage);
             });
         }
@@ -125,10 +140,10 @@
         $scope.changePage();
         $scope.selecteditem = Object;
         $scope.num = $scope.selecteditem.num_justification;
-        $scope.paymentRadio.selectedOption.id = $scope.selecteditem.modePayment;
         $scope.selectedGite = { "_id" : $scope.selecteditem.gite._id };
         $scope.selectedvehicle = { "_id" : $scope.selecteditem.vehicle._id };
-        $scope.date = new Date($scope.selecteditem.date_travel.substring(0, 10));
+        $scope.day = $scope.selecteditem.date_travel.substring(8, 10);
+        $scope.trajetRadio.selectedOption.id = $scope.selecteditem.trajet;
         $scope.nombreKms = $scope.selecteditem.km;
         $scope.start = $scope.selecteditem.start_place;
         $scope.finish = $scope.selecteditem.finish_place;
@@ -138,7 +153,7 @@
     
     $scope.dialogHtml = {
         title: 'Validation de transfert des piéces justificatif des frais kilométriques',
-        body:  'Vous étes sur de vouloir conserver la piéce justificatif jusqu à le mois prochaine ?',
+        body:  'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
         info:  'NB : cette opération est irréversible'
     }   
 

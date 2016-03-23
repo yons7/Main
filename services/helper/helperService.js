@@ -29,7 +29,7 @@
         },
         isValidSpending : function (obj) {
             return (obj !== undefined && obj.date !== undefined && obj.date.year !== undefined &&
-                     obj.date.month !== undefined && obj.num_justification !== undefined &&
+                     obj.date.month !== undefined && obj.num_justification !== undefined && obj.dateachat !== undefined &&
                      obj.modePayment !== undefined && obj.spend !== undefined && obj.gite !== undefined && obj.amount !== undefined)
         },
         isValidNatureSpending: function (obj) {
@@ -48,7 +48,7 @@
         isValidKm : function (obj) {
             return (obj !== undefined && obj.date !== undefined && obj.date.year !== undefined &&
                      obj.date.month !== undefined && obj.num_justification !== undefined && obj.vehicle !== undefined &&
-                     obj.modePayment !== undefined && obj.date_travel !== undefined && obj.gite !== undefined && 
+                     obj.date_travel !== undefined && obj.gite !== undefined && obj.trajet !== undefined &&
                      obj.km !== undefined && obj.start_place !== undefined && obj.finish_place !== undefined)
         },              
         isValidBankStatement : function (bankstatement) {

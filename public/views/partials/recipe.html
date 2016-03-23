@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="type">Type de recette :</label>
+                                <label for="type">Type de recettes :</label>
                                 <div class="radio">
                                     <label class="radio-inline" ng-repeat="type in recipeRadio.availableOptions">
                                         <input type="radio" name="typesRecipe" ng-model="recipeRadio.selectedOption" ng-value="type">{{type.name}}
@@ -75,12 +75,12 @@
                                                                                                                                                                                     },
                                                                                                                                                                 'description2'         : {
                                                                                                                                                                                         'tenant_name': this.nomLoc,
-                                                                                                                                                                                        'star_date' : this.datedebut,
+                                                                                                                                                                                        'star_date' : currentDate.month +'/'+ this.day +'/'+ currentDate.year,
                                                                                                                                                                                         'rental_time' : this.periodeloc,
                                                                                                                                                                                         'libelle': this.libelleList.selectedOption.location.name
                                                                                                                                                                                     },
-                                                                                                                                                                'description3'         : {                                                                                                                                                     'tenant_name': this.nomLoc,
-                                                                                                                                                                                        'star_date' : this.datedebut,
+                                                                                                                                                                'description3'         : {  'tenant_name': this.nomLoc,
+                                                                                                                                                                                        'star_date' : currentDate.month +'/'+ this.day +'/'+ currentDate.year,
                                                                                                                                                                                         'rental_time': this.periode
                                                                                                                                                                                     }
                                                                                                                                                             })">
@@ -101,12 +101,16 @@
                                     <p>Si votre Gîte / Chambre d'hôte n'existe pas dans la liste ci-dessus, vous pouvez l'ajouter ici: <a href="#{{config.routes.accomodation.RouteUrl}}">Gestion des gîtes / chambres d'hôtes</a>.</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="num">Numéro de piéce justificatif : </label>
+                                    <label for="num">Numéro de piéce : </label> Reporter le numéro de pièce sur votre justificatif
                                     <input type="text" class="form-control" disabled name="num" id="num" ng-model="num" placeholder="Généré automatiquement..." size=50 required required-message="'{{validationMessages.requiredMessage}}'" validate-on="dirty">
                                 </div>
                                 <div class="form-group">
-                                    <label for="montant">Montant (€) : </label>
-                                    <input class="form-control" type="number" name="montant" id="montant" step="0.01" min="0" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'">
+                                    <label for="montant">Montant (€) : </label> Entrer les montants des centimes grâce à l'ascenseur ^ ou saisissez une virgule (et pas un point)
+                                    <input class="form-control" type="number" name="montant" id="montant" step="0.01" min="0" placeholder="Saisir le montant de recette.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'">
+                                </div>
+                                <div class="alert alert-info" ng-if="recipeRadio.selectedOption.id==3">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    Montant (€) : 75% du tarif de location
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -133,25 +137,29 @@
                                             <input type="text" class="form-control" name="nomLoc" id="nomLoc" ng-model="nomLoc" placeholder="Saisir le Nom du locataire.." size=50 invalid-message="'{{validationMessages.requiredMessage}}'" validator="(this.nomLoc.length > 0 || recipeRadio.selectedOption.id!=2)" validate-on="dirty">
                                         </div>
                                         <div class="form-group">
-                                            <label for="datedebut">Date de départ : </label>
-                                            <input type="date" class="form-control" name="datedebut" id="datedebut" ng-model="datedebut" placeholder="yyyy-MM-dd" invalid-message="'{{validationMessages.requiredMessage}}'" validator="(this.dateDebutLoyer != undefined  || recipeRadio.selectedOption.id!=2)" validate-on="dirty">
+                                            <label for="day">Date de début de la location : </label>
+                                            <select id="day" name="day" ng-model="day" ng-options="x for x in daysList" class="form-inline" validator="( this.day.length > 0 || recipeRadio.selectedOption.id!=2)" invalid-message="'{{validationMessages.requiredMessage}}'" validate-on="blur">
+                                                <option value="" disabled selected>Jour </option>
+                                            </select> <strong>  {{months[currentDate.month - 1]}} {{currentDate.year}}</strong>
                                         </div>
                                         <div class="form-group">
-                                            <label for="periodeloc">Période de location : </label>
+                                            <label for="periodeloc">Nombre de jours de location : </label>
                                             <input type="number" min="0" step="1" class="form-control" name="periodeloc" id="periodeloc" ng-model="periodeloc" placeholder="Saisir la période de location.." invalid-message="'{{validationMessages.requiredMessage}}'" validator="(this.periodeloc > 0 || recipeRadio.selectedOption.id!=2)" validate-on="dirty">
                                         </div>
                                         <div class="form-group">
-                                            <label for="natureloc">Nature de location : </label>
+                                            <label for="natureloc">Nature de recette : </label>
                                             <select name="natureloc" ng-model="libelleList.selectedOption.location" class="form-control" id="natureloc" validator="( this.libelleList.selectedOption.location.name.length > 0 || recipeRadio.selectedOption.id!=2)" invalid-message="'{{validationMessages.requiredMessage}}'" validate-on="blur"
                                                     ng-options="nature.name for nature in libelleList.availableOptions.location track by nature.name">
-                                                <option value="" disabled selected>Sélectionner la nature de location ..</option>
+                                                <option value="" disabled selected>Sélectionner la nature de recette ..</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="panel-body" ng-show="recipeRadio.selectedOption.id==3">
                                         <div class="form-group">
                                             <label for="datedebut">Date de départ : </label>
-                                            <input type="date" class="form-control" name="datedebut" id="datedebut" ng-model="datedebut" placeholder="yyyy-MM-dd" invalid-message="'{{validationMessages.requiredMessage}}'" validator="(this.datedebut != undefined  || recipeRadio.selectedOption.id!=3)" validate-on="dirty">
+                                            <select id="day" name="day" ng-model="day" ng-options="x for x in daysList" class="form-inline" validator="( this.day.length > 0 || recipeRadio.selectedOption.id!=2)" invalid-message="'{{validationMessages.requiredMessage}}'" validate-on="blur">
+                                                <option value="" disabled selected>Jour </option>
+                                            </select> <strong>  {{months[currentDate.month - 1]}} {{currentDate.year}}</strong>
                                         </div>
                                         <div class="form-group">
                                             <label for="periode">Période d'occupation : </label>
@@ -176,7 +184,7 @@
                                 <thead>
                                     <tr>
                                         <th ng-hide="checkState()"></th>
-                                        <th st-sort="num_justification">N° de piéce justificatif</th>
+                                        <th st-sort="num_justification">N° de piéce justificative</th>
                                         <th>
                                             <select st-search="gite._id">
                                                 <option value="">Tous les gîtes / chambres d'hôtes</option>
@@ -191,11 +199,11 @@
                                         </th>
                                         <th>
                                             <select st-search="recipe">
-                                                <option value="">Tous les type de recettes</option>
+                                                <option value="">Tous les types de recettes</option>
                                                 <option ng-repeat="var in recipeList | unique : 'recipe'" value="{{var.recipe}}"> {{recipeRadio.availableOptions[var.recipe-1].name}}</option>
                                             </select>
                                         </th>
-                                        <th st-sort="amount">Montant</th>
+                                        <th st-sort="amount">Montants</th>
                                         <th>Information</th>
                                        
                                         <th ng-hide="checkState()"></th>
@@ -220,7 +228,7 @@
                                         </td>
                                         <td>{{param.recipe === 1 ? param.description1.libelle : param.recipe === 3 ? 'Occupation Personnelle' : "Loyers (" + param.description2.libelle + ")"}}</td>
                                         <td>{{param.amount | currency}}</td>
-                                        <td>{{param.recipe === 1 ? param.description1.information : param.recipe === 2 ? "Locataire : " + param.description2.tenant_name + " / Date départ : " + param.description2.star_date.substring(0, 10) + " / " + param.description2.rental_time +" jour(s)": "Date départ : " + param.description3.star_date.substring(0, 10) + " / " + param.description3.rental_time +" jour(s)"}}</td>
+                                        <td>{{param.recipe === 1 ? param.description1.information : param.recipe === 2 ? "Locataire : " + param.description2.tenant_name + " / Date départ : " + (param.description2.star_date | date) + " / " + param.description2.rental_time +" jour(s)": "Date départ : " + (param.description3.star_date | date) + " / " + param.description3.rental_time +" jour(s)"}}</td>
                                         <td ng-hide="checkState()">
                                             <div class="pull-right">
                                                 <div confirm-delete-inline on-confirm="deleteRecipe(param)" on-start-edit="starEditRecipe(param)" allow-edit="true"></div>

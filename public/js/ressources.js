@@ -1,6 +1,7 @@
 ﻿myApp.constant('Ressources', {
     "validation": {
-        "requiredMessage": "Veuillez renseigner ce champs.",
+        "requiredMessage": "Veuillez renseigner ce champ.",
+        "invalide":"invalide",
         "passwordNoMatch": "Les mots de passe saisis ne sont pas identiques.",
         "passwordLackChars": "Le mot de passe doit contenir au moins {0} caractères.",
         "emailBadFormat": "Veuillez saisir une adresse email valide."
@@ -75,19 +76,19 @@
         "updateErrorRecetteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Nature de Dépense
-        "addSuccessNatureDepenseTitle": "La Natrue de Dépense a été créée !",
-        "addSuccessNatureDepenseMessage": "Vous avez ajouté la Natrue de Dépense : {0} avec succès.",
-        "addErrorNatureDepenseTitle": "Echec lors de la création du Natrue de Dépense",
+        "addSuccessNatureDepenseTitle": "La Nature de Dépense a été créée !",
+        "addSuccessNatureDepenseMessage": "Vous avez ajouté la Nature de Dépense : {0} avec succès.",
+        "addErrorNatureDepenseTitle": "Echec lors de la création du Nature de Dépense",
         "addErrorNatureDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessNatureDepenseTitle": "La Natrue de Dépense a été désactivée !",
-        "deleteSuccessNatureDepenseMessage": "Vous avez désactivée la Natrue de Dépense : {0} avec succès.",
-        "deleteErrorNatureDepenseTitle": "Erreur lors de la désactivation de la Natrue de Dépense",
+        "deleteSuccessNatureDepenseTitle": "La Nature de Dépense a été désactivée !",
+        "deleteSuccessNatureDepenseMessage": "Vous avez désactivée la Nature de Dépense : {0} avec succès.",
+        "deleteErrorNatureDepenseTitle": "Erreur lors de la désactivation de la Nature de Dépense",
         "deleteErrorNatureDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessNatureDepenseTitle": "La Natrue de Dépense a été modifiée !",
-        "updateSuccessNatureDepenseMessage": "Vous avez modifié la Natrue de Dépense : {0} avec succès.",
-        "updateErrorNatureDepenseTitle": "Echec de la modification de la Natrue de Dépense",
+        "updateSuccessNatureDepenseTitle": "La Nature de Dépense a été modifiée !",
+        "updateSuccessNatureDepenseMessage": "Vous avez modifié la Nature de Dépense : {0} avec succès.",
+        "updateErrorNatureDepenseTitle": "Echec de la modification de la Nature de Dépense",
         "updateErrorNatureDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Dépense
@@ -179,42 +180,24 @@
     "modePayment": [{ "id": 1, "name": "Chéque" },
                     { "id": 2, "name": "Virement" },
                     { "id": 3, "name": 'Carte bancaire' },
-                    { "id": 4, "name": 'Liquide' }],
+                    { "id": 4, "name": 'Liquide' },
+                    { "id": 5, "name": 'Occupation personnelle' }],
     
     "typeRecipes": [{ "id": 2, "name": "Loyers" },
-                    { "id": 1, "name": "Autres recette" },                    
+                    { "id": 1, "name": "Autres recettes" },                    
                     { "id": 3, "name": "Occupation personnelle" }],   
                      
-    "typeSpend"  : [{ "id": 1, "name": "Autres dépense" },
+    "typeSpend"  : [{ "id": 1, "name": "Autres dépenses" },
                     { "id": 2, "name": "Remboursement location" }],
+
+    "typeTrajet": [{ "id": 1, "name": "Trajet Aller" },
+                    { "id": 2, "name": "Trajet A-R" }], 
 
     "libelleList" : {
         "recipe"   : [  { "id": 1, "name": "Ventes de marchandises" },
                         { "id": 2, "name": "Autres prestations" }],
         "location" : [  { "id": 1, "name": "Arrhes" },
                         { "id": 2, "name": "Solde du prix de location" }]},
-
-    "natureSpend" : [
-        { "name" : "Immobilisation", "description" : "Acquisition si valeur unitaire > 500 € d’un  lave-linge, lave-vaisselle, lit, table, fauteuil, baignoire …<br>Réfection : toiture, plomberie, chauffage, peinture, VMC….","min" : 500 },
-        { "name" : "EDF" },
-        { "name" : "Petits équipements", "description" : "Acquisition si valeur unitaire < 500 €<br>L'achat ou le remplacement de petits équipements et mobilier de maison, de  bureau : Convecteurs,  tapis, couettes, couvertures, draps, oreillers, rideaux, nappes, sets de tables, serviettes, plafonniers, spots, lampes, abat-jour, encadrements, poignées de porte, robinets, clés, imprimante, feuille papier, livres d’enfants, guides touristiques,  …<br>L’achat de  petit équipement ménager  et de salle de bain : Vaisselle, vase, fer à repasser, grille-pain, sèche cheveu, armoire de toilette, sèche serviette électrique,  tancarville, abattant WC, balai, aspirateur, réfrigérateur, lave-linge….<br>L’achat de petits équipements  d’intérieur ou d’extérieur : Chaises, plantes et bac à plantes, vélos et équipements vélos, jouets enfants…<br>L’Achat d’outillage : perceuse, outils de jardin, tondeuse…." ,"max" : 500 },
-        { "name" : "Charges locatives et de copropriété" },
-        { "name" : "Entretien et réparations", "description" : "Achats de produits d'entretien : Produits d’entretien, enduits, pot de peinture, huile pour charnière quincaillerie, ampoules, cartouches d’encre pour imprimante, désherbant, engrais…<br>Frais de blanchisserie<br>Petites réparations : Réparation VMC,  aspirateur, vélos,  Réglage du système de chauffage, interventions ponctuelles du plombier…" },
-        { "name" : "Assurance" },
-        { "name" : "Honoraires", "description" : "Cotisation Clé Vacances, Honoraires expert-comptable, honoraires d’avocats" },
-        { "name" : "Publicité, Publications", "description" : "frais pour site internet (prise de vues)<br>Insertion publicitaire dans un journal ou sur un site internet<br>Catalogues, imprimés<br>Publications" },
-        { "name" : "Cadeaux à la clientèle" },
-        { "name" : "Pourboires" },
-        { "name" : "Missions, réception", "description" : "Achats de boissons ou gâteaux apéritifs pour l’accueil des locataires<br>Frais de restaurants ou de réception dans le cadre de la prospection ou de la représentation commerciale pour développer  la location du gite." },
-        { "name" : "Frais postaux" },
-        { "name" : "Téléphone" },
-        { "name" : "Commissions et frais bancaires" },
-        { "name" : "Taxe foncière" },
-        { "name" : "Taxe d’habitation" },
-        { "name" : "CET" },
-        { "name" : "Salaires", "description" : "Les salaires peuvent être payés par chèque ou chèques emplois-services<br>Déduisez les montants des salaires pour emploi à domicile sur votre déclaration de revenu personnelle." },
-        { "name" : "Cotisations sociales", "description" : "Les charges sociales sont à déclarer sur < a href='www.cesu.urssaf.fr'>www.cesu.urssaf.fr</a><br>Déduisez les montants des charges sociales pour emploi à domicile sur votre déclaration de revenu personnelle." }
-    ],
     "vehicle" : [
         { "id" : 1, "t1": 5000, "t2": 20000, "name" : "Voitures", "values": ["3 CV et moins", "4 CV", "5 CV", "6 CV", "7 CV et plus"], "value": {} },
         { "id" : 2, "t1": 3000, "t2": 6000,  "name" : "Deux-roues", "values": ["1 ou 2 CV", "3,4 et 5 CV", "plus de 5 CV"], "value": {}},

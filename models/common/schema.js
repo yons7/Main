@@ -131,8 +131,6 @@ try {
     
     var natureSpendingSchema = new mongoose.Schema({
         name        : { type: String, required: true, unique: true },
-        min         : { type: Number },
-        max         : { type: Number },
         description : { type: String },
         deleted     : { type: Number, default: 0 },
         created     : Date,
@@ -202,6 +200,7 @@ try {
                             },
         modePayment         : { type: Number , required: true },
         spend            : { type: Number , required: true },
+        dateachat        : { type: Date , required: true },
         gite             : { type: mongoose.Schema.ObjectId, ref: 'accomodations' , required: true },
         amount           : { type: Number , required: true },
         description      : {
@@ -288,10 +287,10 @@ try {
             year: { type: Number, required: true },
             month: { type: Number, required: true }
         },
-        modePayment            : { type: Number , required: true },
         gite                : { type: mongoose.Schema.ObjectId, ref: 'accomodations' , required: true },
         vehicle             : { type: mongoose.Schema.ObjectId, ref: 'vehicles' , required: true },
         date_travel         : { type: Date, required: true },
+        trajet              : { type: Number, required: true },
         km                  : { type: Number , required: true },
         start_place         : { type: String , required: true },          
         finish_place        : { type: String , required: true },

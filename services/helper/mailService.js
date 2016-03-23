@@ -3,8 +3,10 @@
 var _mailservice = {
    
     sendMail : function (user) {
-        // create reusable transporter object using SMTP transport
-        var transporter = nodemailer.createTransport(config.mail.transport.param);
+       // create reusable transporter object using SMTP transport
+       // var transporter = nodemailer.createTransport(config.mail.transport.param);
+        
+        var transporter = nodemailer.createTransport(config.mail.transport.protocol, config.mail.transport.param);
 
         // NB! No need to recreate the transporter object. You can use
         // the same transporter object for all e-mails

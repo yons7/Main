@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#{{config.routes.home.RouteUrl}}">Easy 16i</a>
+    <a class="navbar-brand" id="logo" href="#{{config.routes.home.RouteUrl}}">Easy 16i</a>
 </div>
 <!-- Top Menu Items -->
 <ul class="nav navbar-right top-nav">
@@ -41,16 +41,10 @@
         <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{userName}} <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li ng-if="isAdmin" class="message-preview">
-                <a href="#{{config.routes.subscription.RouteUrl}}"><i class="fa fa-fw fa-user"></i> Gestion des profiles</a>
-            </li>
-            <li class="message-preview">
-                <a href="#{{config.routes.accomodation.RouteUrl}}"><i class="fa fa-fw fa-envelope"></i> Gestion des gîtes / chambres d'hôtes</a>
+                <a href="#{{config.routes.subscription.RouteUrl}}"><i class="fa fa-fw fa-user"></i> Gestion des Profil</a>
             </li>
             <li ng-if="isAdmin" class="message-preview">
-                <a href="#{{config.routes.natureSpending.RouteUrl}}"><i class="fa fa-fw fa-cogs"></i> Gestion des nature de dépense</a>
-            </li>
-            <li class="message-preview">
-                <a href="#{{config.routes.scales.RouteUrl}}"><i class="fa fa-fw fa-gear"></i> Paramétre des taux automobiles</a>
+                <a href="#{{config.routes.natureSpending.RouteUrl}}"><i class="fa fa-fw fa-cogs"></i> Gestion des natures de dépenses</a>
             </li>
             <li>
                 <a href="" ng-click=" logout()"><i class=" fa fa-fw fa-power-off"></i> Déconnexion</a>

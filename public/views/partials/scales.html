@@ -9,17 +9,12 @@
                     <img class="img-thumbnail" src="img/logo.png" alt="">Gestion des barèmes Kms pour l'année civile {{currentDate.year}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
-                    </li>
                     <li>
-                        <i class="fa fa-table"></i> Traitement des taux par %
+                        <i class="fa fa-table"></i> Liste des taux par véhicules
                     </li>
                 </ol>
             </div>
         </div>
-
-
 
         <div class="row">
             <div class="col-lg-12">
@@ -46,9 +41,12 @@
                         </div>
                         <div class="alert alert-success" ng-if="isScaleFull" ng-hide="isLoadingScales">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <i class="fa fa-check-circle"></i>  <strong>Paramétres de {{paramlist.selectedOption.name}}</strong> pour l'année civile {{currentDate.year}} sont déjà configurés. <span ng-if="isAdmin">Vous pouvez modifier les taux des barèmes kilométriques à tout moment.</span><span ng-if="!isAdmin">Pour les modifier merci de faire une demande à votre administrateur.</span>
+                            <i class="fa fa-check-circle"></i>  <strong>Paramétres de {{paramlist.selectedOption.name}}</strong> pour l'année civile {{currentDate.year}} sont configurés. <span ng-if="isAdmin">Vous pouvez modifier les taux des barèmes kilométriques à tout moment.</span><span ng-if="!isAdmin">Pour les modifier merci de faire une demande à votre administrateur.</span>
                         </div>
-
+                        <div class="alert alert-info" ng-if="!isScaleFull && role==1">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            Aller chercher le tarif frais kilométrique sur <a href="https://www.service-public.fr/">Service-Public.fr</a>, Déduction des frais réels : les barèmes kilométriques
+                        </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="spinner-container-panel" ng-show="isLoadingScales"><span us-spinner spinner-theme="easy16i-panel"></span></div>
@@ -120,11 +118,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group pull-right" ng-hide="isLoadingScales" ng-if="isAdmin">
-                            <button type="button" class="btn btn-default" ng-click="clean()">Vider les champs</button>
+                        <div class="col-lg-6">
+                            <div class="alert alert-info" ng-if="paramlist.selectedOption.name==='Voitures'">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                Puissance Fiscale : 7CV est le tarif remboursement des voitures > 7CV
+                            </div>
                         </div>
+                            <div class="col-lg-6">
+                                <div class="form-group pull-right" ng-hide="isLoadingScales" ng-if="isAdmin">
+                                    <button type="button" class="btn btn-default" ng-click="clean()">Vider les champs</button>
+                                </div>
+                            </div>
                     </div>
-
                 </div>
             </div>
         </div>

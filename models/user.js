@@ -24,12 +24,15 @@ function User() {
                 if (user == null)
                     return cb('Compte n\'existe pas', null);
                 
+                if (user.deleted !== 0)
+                    return cb('Compte Désactiver !! Merci de contacter votre administrateur', null);
+            
                 // verify password against its hash in db
                 user.comparePassword(password, function (err, isMatch) {
                     //if (err) throw err;
                     if (isMatch)
                         return cb(null, user);
-                    else return cb(null, undefined);
+                    else return cb('Mot de passe incorrecte', null);
                 });
             }
         }

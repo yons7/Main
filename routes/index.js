@@ -33,7 +33,7 @@ router.post(config.client.userApiUrl, UserService.addUser);
 router.delete(config.client.userApiUrl, UserService.deleteUser);
 router.put(config.client.userApiUrl + '/:id', UserService.updateUser);
 
-router.get(config.client.natureSpendingApiUrl, NatureSpendingService.getNatureSpending);
+router.get(config.client.natureSpendingApiUrl.replace("admin/", "") , NatureSpendingService.getNatureSpending);
 router.post(config.client.natureSpendingApiUrl, NatureSpendingService.addNatureSpending);
 router.put(config.client.natureSpendingApiUrl + '/:id', NatureSpendingService.updateNatureSpending);
 

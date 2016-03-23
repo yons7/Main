@@ -8,9 +8,6 @@
                     <img class="img-thumbnail" src="img/logo.png" alt="">Importer votre relevé bancaire pour {{months[currentDate.month- 1]}} {{currentDate.year}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
-                    </li>
                     <li ng-if="currentBankStatement === undefined || currentBankStatement === null">
                         <i class="fa fa-file-excel-o"></i> Import du relevé bancaire
                     </li>
@@ -47,9 +44,6 @@
         <div class="page-header" ng-if="selectedSheet != undefined && (currentBankStatement === undefined || currentBankStatement === null)">
             <div class="content-heading"><h3></h3></div>
             <ol class="breadcrumb">
-                <li class="active">
-                    <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
-                </li>
                 <li>
                     <i class="fa fa-eye"></i> Aperçu du relevé bancaire
                 </li>

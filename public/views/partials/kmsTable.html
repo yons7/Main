@@ -8,9 +8,6 @@
                     <img class="img-thumbnail" src="img/logo.png" alt="">Tableau de bord
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-edit"></i><a href="#{{config.routes.home.RouteUrl}}"> Easy 16i comptable</a>
-                    </li>
                     <li>
                         <i class="fa fa-table"></i> Tableau de bord des Frais kilométriques
                     </li>
@@ -39,7 +36,7 @@
 
                     <div class="panel-body">
                         <div class="alert alert-info">
-                            <i class="fa fa-info-circle"></i> Vous pouvez lancer les calculs de l'année civile <strong>{{currentDate.year}}</strong>, les données sera modifiable via les masques de saisie avant la validation de l'administrateur.
+                            <i class="fa fa-info-circle"></i> Vous pouvez lancer les calculs de l'année civile <strong>{{currentDate.year}}</strong>, les données seront modifiables via les masques de saisie avant la validation de l'administrateur.
                         </div>
                         <div class="alert alert-warning" ng-if="!isScale">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -62,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="ligne in dashboard">
-                                        <td>{{ligne.mois | capitalize}}</td>
+                                        <td>{{ligne.date}}</td>
                                         <td>{{ligne.libelle}}</td>
                                         <td>{{ligne.kms}}</td>
                                         <td>{{ligne.taux}}</td>

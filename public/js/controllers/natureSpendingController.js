@@ -75,8 +75,6 @@
         $scope.selecteditem = Object;
         $scope.natureName = $scope.selecteditem.name;
         $scope.desc = $scope.selecteditem.description !== undefined ? $scope.selecteditem.description : undefined;
-        $scope.min = $scope.selecteditem.min !== undefined ? $scope.selecteditem.min : undefined;
-        $scope.max = $scope.selecteditem.max !== undefined ? $scope.selecteditem.max :undefined;
         $scope.deleted = $scope.selecteditem.deleted;
     }
 });

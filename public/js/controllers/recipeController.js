@@ -13,10 +13,25 @@
 
     $scope.$on('DateChange', function (events, args) {
         $scope.num = undefined;
+        $scope.getCurrentDays();
         $scope.getCurrentState();
         $scope.listRecipe();
  
-    })
+    });
+    
+    $scope.getCurrentDays = function () {       
+        // Get number of days based on month + year 
+        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
+        var nbDays = new Date($rootScope.currentDate.year, $rootScope.currentDate.month, 0).getDate() || 31;
+        
+        $scope.daysList = [];
+        for (var i = 1; i <= nbDays; i++) {
+            var iS = i.toString();
+            $scope.daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
+        }
+    };
+    $scope.getCurrentDays();
+
     $scope.getCurrentState = function () {
         $scope.isLoadingCurrentState = true;
         ApiService.BankStatement.get({ params: { 'date.year' : $rootScope.currentDate.year, 'date.month' : $rootScope.currentDate.month } }, function (res) {
@@ -110,6 +125,7 @@
                     window.location.href = '#/rapprochement';
             }, function (err) {
                 HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.add, err.data.errormessage);
+                generateNumPiece(); 
             });                   
         }
     }
@@ -156,12 +172,12 @@
                 break;
             case 2:
                 $scope.nomLoc = $scope.selecteditem.description2.tenant_name;
-                $scope.datedebut = new Date($scope.selecteditem.description2.star_date.substring(0, 10));
+                $scope.day = $scope.selecteditem.description2.star_date.substring(8, 10);
                 $scope.periodeloc = $scope.selecteditem.description2.rental_time;
                 $scope.libelleList.selectedOption.location = { "name" : $scope.selecteditem.description2.libelle };
                 break;
             case 3:
-                $scope.datedebut = new Date($scope.selecteditem.description3.star_date.substring(0, 10));
+                $scope.day = $scope.selecteditem.description3.star_date.substring(8, 10);
                 $scope.periode = $scope.selecteditem.description3.rental_time;
                 break;
             default:
@@ -172,7 +188,7 @@
 
     $scope.dialogHtml = {
         title: 'Validation de transfert des piéces justificatif des recettes',
-        body:  'Vous étes sur de vouloir conserver la piéce justificatif jusqu à le mois prochaine ?',
+        body: 'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
         info:  'NB : cette opération est irréversible'
     }    
     

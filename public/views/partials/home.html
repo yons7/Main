@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     <img class="img-thumbnail" src="img/logo.png" alt="">Bienvenue
-                    <small>sur le portail Easy16i Comptable</small>
+                    <small>sur le portail <a id="logo">Easy16i Comptable</a></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
@@ -23,7 +23,11 @@
                 </div>
                 <div class="alert alert-success" ng-if="isScale" ng-hide="isLoadingBankStatements || isLoadingScales">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <i class="fa fa-hand-peace-o"></i>  <strong>Paramétres des Véhicules</strong> pour l'année civile {{currentDate.year}} sont déjà configurés. Pour modifier les barèmes merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétres Des Taux Automobiles </a>
+                    <i class="fa fa-hand-peace-o"></i>  <strong>Paramétres des Véhicules</strong> pour l'année civile {{currentDate.year}} sont configurés. Pour consulter les barèmes merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétres Des Taux Automobiles </a>
+                </div>
+                <div class="alert alert-info" ng-if="!isScale && role==1">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    Aller chercher le tarif frais kilométrique sur <a href="https://www.service-public.fr/">Service-Public.fr</a>, Déduction des frais réels : les barèmes kilométriques
                 </div>
             </div>
         </div>
@@ -63,6 +67,24 @@
                                 <div class="clearfix"></div>
                             </div>
                         </a>
+
+                        <div class="panel-footer" ng-if="var.statut === undefined">
+                            <span class="pull-left">Relevé Bancaire</span>
+                            <span class="pull-right"><i class="fa fa-times-circle"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                            <div class="panel-footer" ng-if="var.statut === undefined">
+                                <span class="pull-left">Rapprochement Recettes</span>
+                                <span class="pull-right"><i class="fa fa-times-circle"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        
+                            <div class="panel-footer" ng-if="var.statut === undefined">
+                                <span class="pull-left">Rapprochement Dépenses</span>
+                                <span class="pull-right"><i class="fa fa-times-circle"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                     
                     </div>
                 </div>
          
