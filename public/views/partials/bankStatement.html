@@ -158,23 +158,25 @@
                                     <tr>
                                         <th>Date d'opération</th>
                                         <th>Libellé</th>
+                                        <th>Moyen de paiement</th>
                                         <th>Débit</th>
                                         <th>Crédit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="line in displayedCurrentBankStatement">
-                                        <td>{{line.date}}</td>
+                                        <td>{{line.date | date}}</td>
                                         <td>{{line.title}}</td>
+                                        <td>{{line.modePayment}}</td>
                                         <td>{{(line.type ==='Débit') ? line.amount : null}}</td>
                                         <td>{{(line.type ==='Crédit') ? line.amount : null}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" class="highrow"><div class="text-right"><strong>Solde début du mois</strong></div></td>
+                                        <td colspan="3" class="highrow"><div class="text-right"><strong>Solde début du mois</strong></div></td>
                                         <td colspan="2" class="highrow"><div class="text-right"><strong>{{currentBankStatement.startbalance}}</strong></div></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><div class="text-right"><strong>Solde fin du mois</strong></div></td>
+                                        <td colspan="3"><div class="text-right"><strong>Solde fin du mois</strong></div></td>
                                         <td colspan="2"><div class="text-right"><strong>{{currentBankStatement.endbalance}}</strong></div></td>
                                     </tr>
                                 </tbody>

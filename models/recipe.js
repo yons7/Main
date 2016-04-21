@@ -6,7 +6,7 @@ function Recipe() {
     var recipe = {};
 
     var modelName = "recipes";
-    recipe.__proto__ = mongooseDAO(modelName);      //inherits mongooseDAO class and connects to "spendings" model.
+    recipe.__proto__ = mongooseDAO(modelName);      //inherits mongooseDAO class and connects to "recipes" model.
     db = recipe.db();
     
     recipe.getAll = function (params, configBd, cb) {
@@ -15,6 +15,9 @@ function Recipe() {
             if (err)
                 return cb(err, null);
             
+            //if (!params.deleted)
+            //    params.deleted = 0;
+
             connection.models[modelName].find(params).populate('gite').exec(onFound);
             function onFound(err, result) {
                 //db.closeBD();

@@ -131,6 +131,7 @@ try {
     
     var natureSpendingSchema = new mongoose.Schema({
         name        : { type: String, required: true, unique: true },
+        signe       : { type: Number, required: true },
         description : { type: String },
         deleted     : { type: Number, default: 0 },
         created     : Date,
@@ -151,6 +152,7 @@ try {
         endbalance      : { type: String, required: true },
         transactions    : [{
                             title           : { type: String, required: true },
+                            modePayment     : { type: String, required: true },
                             amount          : { type: Number, required: true },
                             type            : { type: String, required: true },
                             affectation     : { type: String },
@@ -213,7 +215,8 @@ try {
                                 rental_time: { type: Number },
                                 star_date       : { type: Date },
                                 reason_rembourssement: { type: String }
-                            }
+                            },
+        deleted           : { type: Number, default: 0 }
     });
 
     spendingSchema.index({ num_justification: 1, date: 1 }, { unique: true });
@@ -243,7 +246,8 @@ try {
         description3      : {
             star_date       : { type: Date },
             rental_time     : { type: Number }
-        }
+        },
+        deleted           : { type: Number, default: 0 }
     });
         
     recipeSchema.index({ num_justification: 1, date: 1 }, { unique: true });
@@ -294,7 +298,8 @@ try {
         km                  : { type: Number , required: true },
         start_place         : { type: String , required: true },          
         finish_place        : { type: String , required: true },
-        motif               : { type: String }
+        motif               : { type: String },
+        deleted           : { type: Number, default: 0 }
     });
         
     kmSchema.index({ num_justification: 1, date: 1 }, { unique: true });

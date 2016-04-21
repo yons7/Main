@@ -16,11 +16,14 @@
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-car"></i> Saisie des frais kilométriques <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo1" class="collapse">
-                <li ng-class="isActive(config.routes.km.RouteUrl) ? 'active' : '';">
+                <li ng-style="isActive(config.routes.km.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
                     <a href="#{{config.routes.km.RouteUrl}}">Frais kilométriques</a>
                 </li>
-                <li ng-class="isActive(config.routes.vehicle.RouteUrl) ? 'active' : '';">
+                <li ng-style="isActive(config.routes.vehicle.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
                     <a href="#{{config.routes.vehicle.RouteUrl}}">Gestion des Véhicules</a>
+                </li>
+                <li ng-if="role!==1" ng-style="isActive(config.routes.scales.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
+                    <a href="#{{config.routes.scales.RouteUrl}}">Consulter les paramétres des taux automobiles</a>
                 </li>
             </ul>
         </li>       
@@ -33,22 +36,19 @@
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-table"></i> Tableau de bord <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo2" class="collapse">
-                <li ng-class="isActive(config.routes.recipesTable.RouteUrl) ? 'active' : '';">
+                <li ng-style="isActive(config.routes.recipesTable.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
                     <a href="#{{config.routes.recipesTable.RouteUrl}}">Recettes</a>
                 </li>
-                <li ng-class="isActive(config.routes.spendingTable.RouteUrl) ? 'active' : '';">
+                <li ng-style="isActive(config.routes.spendingTable.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
                     <a href="#{{config.routes.spendingTable.RouteUrl}}">Dépenses</a>
                 </li>
-                <li ng-class="isActive(config.routes.recipe_spendingTable.RouteUrl) ? 'active' : '';">
+                <li ng-style="isActive(config.routes.recipe_spendingTable.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
                     <a href="#{{config.routes.recipe_spendingTable.RouteUrl}}">Recettes - Dépenses</a>
                 </li>
-                <li ng-class="isActive(config.routes.kmsTable.RouteUrl) ? 'active' : '';">
+                <li ng-style="isActive(config.routes.kmsTable.RouteUrl) ? {'color': '#fff', 'background-color': '#080808'} : {};">
                     <a href="#{{config.routes.kmsTable.RouteUrl}}">Indemnités des frais kilométriques</a>
                 </li>
             </ul>
-        </li>
-        <li ng-class="isActive(config.routes.scales.RouteUrl) ? 'active' : '';">
-            <a href="#{{config.routes.scales.RouteUrl}}"><i class="fa fa-fw fa-gear"></i> Paramétres des taux automobiles</a>
         </li>
     </ul>
 </div>

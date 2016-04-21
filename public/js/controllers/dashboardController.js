@@ -46,9 +46,9 @@
         $scope.isLoadingRecipes = true;
         $scope.dashboard = undefined;
         if (!$scope.selectedGite || $scope.selectedGite === null) {
-            params = { 'date.year' : $rootScope.currentDate.year };
+            params = { 'date.year' : $rootScope.currentDate.year, 'deleted' : 0 };
         } else {
-            params = { 'date.year' : $rootScope.currentDate.year, 'gite' : $scope.selectedGite._id };
+            params = { 'date.year' : $rootScope.currentDate.year, 'gite' : $scope.selectedGite._id, 'deleted' : 0 };
         }
         ApiService.Recipe.get({ params: params }, function (res) {
             $scope.dashboard = HelperService.displayDashboardRecipe(res.message);
@@ -73,9 +73,9 @@
         $scope.isLoadingSpendings = true;
         $scope.dashboard = undefined;
         if (!$scope.selectedGite || $scope.selectedGite === null) {
-            params = { 'date.year' : $rootScope.currentDate.year , 'spend' : 1 };
+            params = { 'date.year' : $rootScope.currentDate.year , 'spend' : 1, 'deleted' : 0 };
         } else {
-            params = { 'date.year' : $rootScope.currentDate.year, 'spend' : 1 , 'gite' : $scope.selectedGite._id };
+            params = { 'date.year' : $rootScope.currentDate.year, 'spend' : 1 , 'gite' : $scope.selectedGite._id, 'deleted' : 0 };
         }
         ApiService.Spending.get({ params: params }, function (res) { 
             $scope.dashboard = HelperService.displayDashboardSpending(res.message, $scope.listNatureSpend);
@@ -102,9 +102,9 @@
         $scope.isLoadingKms = true;
         $scope.dashboard = undefined;
         if (!$scope.selectedGite || $scope.selectedGite === null) {
-            params = { 'date.year' : $rootScope.currentDate.year };
+            params = { 'date.year' : $rootScope.currentDate.year, 'deleted' : 0 };
         } else {
-            params = { 'date.year' : $rootScope.currentDate.year, 'gite' : $scope.selectedGite._id };
+            params = { 'date.year' : $rootScope.currentDate.year, 'gite' : $scope.selectedGite._id, 'deleted' : 0 };
         }
         ApiService.Km.get({ params: params }, function (res) {
             $scope.listKm = res.message;
@@ -119,9 +119,9 @@
         $scope.isLoadingRecette_Depense = true;
         $scope.dashboard = undefined;
         if (!$scope.selectedGite || $scope.selectedGite === null) {
-            params = { 'date.year' : $rootScope.currentDate.year };
+            params = { 'date.year' : $rootScope.currentDate.year, 'deleted' : 0 };
         } else {
-            params = { 'date.year' : $rootScope.currentDate.year, 'gite' : $scope.selectedGite._id };
+            params = { 'date.year' : $rootScope.currentDate.year, 'gite' : $scope.selectedGite._id, 'deleted' : 0 };
         }
         ApiService.Recipe.get({ params: params }, function (res1) {
             params.spend = 1;

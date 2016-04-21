@@ -48,7 +48,7 @@
                                 <label for="type">Moyen de paiement :</label>
                                 <div class="radio">
                                     <label class="radio-inline" ng-repeat="type in paymentRadio.availableOptions">
-                                        <input type="radio" name="typePayement" ng-model="paymentRadio.selectedOption" ng-value="type">{{type.name}}
+                                        <input type="radio" name="typePayement" ng-model="paymentRadio.selectedOption" ng-value="type" ng-click="CheckOccupationPayment()">{{type.name}}
                                     </label>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <label for="type">Type de recettes :</label>
                                 <div class="radio">
                                     <label class="radio-inline" ng-repeat="type in recipeRadio.availableOptions">
-                                        <input type="radio" name="typesRecipe" ng-model="recipeRadio.selectedOption" ng-value="type">{{type.name}}
+                                        <input type="radio" name="typesRecipe" ng-model="recipeRadio.selectedOption" ng-value="type" ng-click="CheckOccupationRecipe()">{{type.name}}
                                     </label>
                                 </div>
                             </div>
@@ -147,6 +147,9 @@
                                             <input type="number" min="0" step="1" class="form-control" name="periodeloc" id="periodeloc" ng-model="periodeloc" placeholder="Saisir la période de location.." invalid-message="'{{validationMessages.requiredMessage}}'" validator="(this.periodeloc > 0 || recipeRadio.selectedOption.id!=2)" validate-on="dirty">
                                         </div>
                                         <div class="form-group">
+                                            <p>L'action doit être saisir le nombre de jours et non saisir la période de location.</p>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="natureloc">Nature de recette : </label>
                                             <select name="natureloc" ng-model="libelleList.selectedOption.location" class="form-control" id="natureloc" validator="( this.libelleList.selectedOption.location.name.length > 0 || recipeRadio.selectedOption.id!=2)" invalid-message="'{{validationMessages.requiredMessage}}'" validate-on="blur"
                                                     ng-options="nature.name for nature in libelleList.availableOptions.location track by nature.name">
@@ -156,13 +159,13 @@
                                     </div>
                                     <div class="panel-body" ng-show="recipeRadio.selectedOption.id==3">
                                         <div class="form-group">
-                                            <label for="datedebut">Date de départ : </label>
+                                            <label for="datedebut">Date de début : </label>
                                             <select id="day" name="day" ng-model="day" ng-options="x for x in daysList" class="form-inline" validator="( this.day.length > 0 || recipeRadio.selectedOption.id!=2)" invalid-message="'{{validationMessages.requiredMessage}}'" validate-on="blur">
                                                 <option value="" disabled selected>Jour </option>
                                             </select> <strong>  {{months[currentDate.month - 1]}} {{currentDate.year}}</strong>
                                         </div>
                                         <div class="form-group">
-                                            <label for="periode">Période d'occupation : </label>
+                                            <label for="periode">Nombre de jours : </label>
                                             <input type="number" min="0" step="1" class="form-control" name="periode" id="periode" ng-model="periode" placeholder="Saisir la période de location.." invalid-message="'{{validationMessages.requiredMessage}}'" validator="( this.periode > 0 || recipeRadio.selectedOption.id!=3)" validate-on="dirty">
                                         </div>
                                     </div>
@@ -211,7 +214,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="param in displayedRecipeList">
+                                    <tr ng-repeat="param in displayedRecipeList" ng-class="param.deleted === 1 ? 'ng-scope danger greyedOut' : 'ng-scope';">
                                         <td ng-hide="checkState()">
 
                                             <button type="button" class="btn btn-sm btn-warning"
@@ -228,13 +231,14 @@
                                         </td>
                                         <td>{{param.recipe === 1 ? param.description1.libelle : param.recipe === 3 ? 'Occupation Personnelle' : "Loyers (" + param.description2.libelle + ")"}}</td>
                                         <td>{{param.amount | currency}}</td>
-                                        <td>{{param.recipe === 1 ? param.description1.information : param.recipe === 2 ? "Locataire : " + param.description2.tenant_name + " / Date départ : " + (param.description2.star_date | date) + " / " + param.description2.rental_time +" jour(s)": "Date départ : " + (param.description3.star_date | date) + " / " + param.description3.rental_time +" jour(s)"}}</td>
+                                        <td>{{param.recipe === 1 ? param.description1.information : param.recipe === 2 ? "Locataire : " + param.description2.tenant_name + " / Date location : " + (param.description2.star_date | date) + " / " + param.description2.rental_time +" jour(s)": "Date départ : " + (param.description3.star_date | date) + " / " + param.description3.rental_time +" jour(s)"}}</td>
+
                                         <td ng-hide="checkState()">
-                                            <div class="pull-right">
-                                                <div confirm-delete-inline on-confirm="deleteRecipe(param)" on-start-edit="starEditRecipe(param)" allow-edit="true"></div>
-                                            </div>
+                                            <div confirm-delete-inline on-confirm="deleteRecipe(param)" on-start-edit="starEditRecipe(param)" allow-edit="true" ng-hide="param.deleted===1 || param.isBeingModified"></div>
+                                            <div confirm-undo-inline on-confirm="UndoDeleteRecipe(param)" ng-hide="param.isBeingModified || param.deleted!==1"></div>
+                                            <div class="spinner-container-input" ng-show="param.isBeingModified" style="width: 34px;"><span us-spinner spinner-theme="easy16i-input"></span></div>
                                         </td>
-                                  
+
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -255,17 +259,17 @@
                             <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                                 <button type="button" class="btn btn-xs btn-warning">
                                     <i class="fa fa-share"></i>
-                                </button>  Déplacer la justification au mois suivant
+                                </button>  Déplacer la pièce justificative au mois suivant
                             </div>
                             <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                                 <button type="button" class="btn btn-xs btn-primary startEditBtn">
                                     <i class="fa fa-edit"></i>
-                                </button>  Modifier la justification
+                                </button>  Modifier la pièce  justificative
                             </div>
                             <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                                 <button type="button" class="btn btn-xs btn-danger">
                                     <i class="fa fa-trash"></i>
-                                </button>  Supprimer la justification
+                                </button>  Supprimer la pièce justificative
                             </div>
                         </div>
                       

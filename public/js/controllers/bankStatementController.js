@@ -5,7 +5,8 @@
                                 { id: '1', name: 'Libellé/Opérations' },
                                 { id: '2', name: 'Crédit' },
                                 { id: '3', name: 'Débit' },
-                                { id: '4', name: 'Date' }]
+                                { id: '4', name: 'Date' },
+                                { id: '5', name: 'Moyen de paiement' }]
     };
     
     $scope.$on('DateChange', function (events, args) {

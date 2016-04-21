@@ -52,7 +52,7 @@
             
             var matchingApiService = ($scope.operationType === "Crédit") ? ApiService.Recipe : ApiService.Spending;
             
-            matchingApiService.get({ params: { 'date.year' : $rootScope.currentDate.year , 'date.month' : $rootScope.currentDate.month } }, function (res) {
+            matchingApiService.get({ params: { 'date.year' : $rootScope.currentDate.year , 'date.month' : $rootScope.currentDate.month , 'deleted' : 0 } }, function (res) {
                 $scope.justificationList = res.message;
                 $scope.isLoadingJustifications = false;
             if ($scope.justificationList !== null && $scope.justificationList !== undefined) {
@@ -201,7 +201,7 @@
         PersistentDataService.mappingOp = true;
     };
     
-    $scope.toNextMonth = function (Object , isAll) {       
+    $scope.toNextMonth = function (Object , isAll) {
         var matchingApiService = ($scope.operationType === "Crédit") ? ApiService.Recipe : ApiService.Spending;
         if (Object.date.month === 12) {
             Object.date.year++;
@@ -215,7 +215,7 @@
         }, function (err) {
             HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.update, err.data.errormessage);
         });
-    }
+    };
     
     $scope.moveAllJustifications = function () {
         $.each($scope.justificationList, function (index, justif) {
@@ -226,8 +226,8 @@
     };
     
     $scope.dialogHtml = {
-        title: 'Validation de transfert des piéces justificatif',
-        body: 'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
+        title: 'Validation de transfert des piéces justificatives',
+        body: 'Confirmer le transfert de la pièce justificative sur le mois prochain (car pas sur le relevé bancaire du mois)',
         info: 'NB : cette opération est irréversible'
     };
     

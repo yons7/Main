@@ -4,7 +4,6 @@
     $scope.$on('DateChange', function (events, args) {
         if (!args || (args && !args.IsOnlyMonthChange)) {
             $scope.getCurrentBankStatement();
-            $scope.getCurrentScales();
         }
     });
     
@@ -14,20 +13,6 @@
         PersistentDataService.date = $rootScope.currentDate;
         dateChanged && $rootScope.$broadcast('DateChange', { IsOnlyMonthChange : true });
     }    
-    
-    $scope.getCurrentScales = function () {
-        $scope.isLoadingScales = true;
-        ApiService.Scales.get({ params: { 'year' : $rootScope.currentDate.year } }, function (res) {
-            if (res.message.length === 9) {
-                $scope.isScale = true;
-            } else {
-                $scope.isScale = false;
-            }
-            $scope.isLoadingScales = false;
-        }, function (err) {
-            console.log(err);
-        });
-    }
     
     $scope.getCurrentBankStatement = function () {
         $scope.isLoadingBankStatements = true;
@@ -72,6 +57,5 @@
     };
     
     $scope.getCurrentBankStatement();
-    $scope.getCurrentScales();
 
 });

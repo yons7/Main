@@ -36,7 +36,9 @@ var _natureSpendingService = {
     
     updateNatureSpending : function (req, res) {
         var updatedNatureSpending = req.body;
-        
+        if (updatedNatureSpending.signe === undefined) {
+            updatedNatureSpending.signe = 1;
+        }
         if (!helper.validation.isValidNatureSpending(updatedNatureSpending)) {
             helper.sendResponse(401, { "errormessage": "Invalid credentials (value max must be more then value min) or one the fields is empty" }, res);
             return;

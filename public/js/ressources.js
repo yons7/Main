@@ -12,161 +12,161 @@
         "authError": "Il est possible que vous ayez mal saisi vos identifiants. Veuillez essayez à nouveau.",
 
         //message User
-        "addSuccessUserTitle": "Le compte a été créé !",
+        "addSuccessUserTitle": "Le compte a été créé",
         "addSuccessUserMessage": "Vous avez ajouté l'utilisateur : {0} avec succès.",
         "addErrorUserTitle": "Echec lors de la création du compte",
         "addErrorUserMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessUserTitle": "Le compte a été désactivé !",
+        "deleteSuccessUserTitle": "Le compte a été désactivé",
         "deleteSuccessUserMessage": "Vous avez désactivé l'utilisateur : {0} avec succès.",
         "deleteErrorUserTitle": "Erreur lors de la désactivation du compte",
         "deleteErrorUserMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessUserTitle": "Le compte a été réactivé !",
+        "updateSuccessUserTitle": "Le compte a été réactivé",
         "updateSuccessUserMessage": "Vous avez réactivé l'utilisateur : {0} avec succès.",
         "updateErrorUserTitle": "Echec de la réactivation du compte",
         "updateErrorUserMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Gîte
-        "addSuccessGiteTitle": "Le Gîte a été crée !",
+        "addSuccessGiteTitle": "Le Gîte a été crée",
         "addSuccessGiteMessage": "Vous avez ajouté le Gîte : {0} avec succès.",
         "addErrorGiteTitle": "Echec lors de la création du Gîte",
         "addErrorGiteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessGiteTitle": "Le Gîte a été supprimé !",
+        "deleteSuccessGiteTitle": "Le Gîte a été supprimé",
         "deleteSuccessGiteMessage": "Vous avez supprimé le Gîte : {0} avec succès.",
         "deleteErrorGiteTitle": "Erreur lors de la suppression de du Gîte",
-        "deleteErrorGiteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
+        "deleteErrorGiteMessage": "Suppression impossible car sur ce gite ont été comptabilisés des frais kilométriques, des recettes ou des dépenses",
         
-        "updateSuccessGiteTitle": "Le Gîte a été modifié !",
+        "updateSuccessGiteTitle": "Le Gîte a été modifié",
         "updateSuccessGiteMessage": "Vous avez modifié le Gîte : {0} avec succès.",
         "updateErrorGiteTitle": "Echec de la modification du Gîte",
         "updateErrorGiteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Vehicule
-        "addSuccessVehiculeTitle": "Le Véhicule a été créé !",
+        "addSuccessVehiculeTitle": "Le Véhicule a été créé",
         "addSuccessVehiculeMessage": "Vous avez ajouté le Véhicule : {0} avec succès.",
         "addErrorVehiculeTitle": "Echec lors de la création du Véhicule",
         "addErrorVehiculeMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessVehiculeTitle": "Le Véhicule a été supprimé !",
+        "deleteSuccessVehiculeTitle": "Le Véhicule a été supprimé",
         "deleteSuccessVehiculeMessage": "Vous avez supprimé le Véhicule : {0} avec succès.",
         "deleteErrorVehiculeTitle": "Erreur lors de la suppression du Véhicule",
         "deleteErrorVehiculeMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessVehiculeTitle": "Le Véhicule a été modifié !",
+        "updateSuccessVehiculeTitle": "Le Véhicule a été modifié",
         "updateSuccessVehiculeMessage": "Vous avez modifié le Véhicule : {0} avec succès.",
         "updateErrorVehiculeTitle": "Echec de la modification du Véhicule",
         "updateErrorVehiculeMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Recette
-        "addSuccessRecetteTitle": "La Recette a été créée !",
+        "addSuccessRecetteTitle": "La Recette a été créée",
         "addSuccessRecetteMessage": "Vous avez ajouté la Recette : {0} avec succès.",
         "addErrorRecetteTitle": "Echec lors de la création de la Recette",
         "addErrorRecetteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessRecetteTitle": "La Recette a été supprimée !",
+        "deleteSuccessRecetteTitle": "La Recette a été supprimée",
         "deleteSuccessRecetteMessage": "Vous avez supprimé la Recette : {0} avec succès.",
         "deleteErrorRecetteTitle": "Erreur lors de la suppression de la Recette",
         "deleteErrorRecetteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessRecetteTitle": "La Recette a été modifiée !",
+        "updateSuccessRecetteTitle": "La Recette a été modifiée",
         "updateSuccessRecetteMessage": "Vous avez modifié la Recette : {0} avec succès.",
         "updateErrorRecetteTitle": "Echec de la modification de la Recette",
         "updateErrorRecetteMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Nature de Dépense
-        "addSuccessNatureDepenseTitle": "La Nature de Dépense a été créée !",
+        "addSuccessNatureDepenseTitle": "La Nature de Dépense a été créée",
         "addSuccessNatureDepenseMessage": "Vous avez ajouté la Nature de Dépense : {0} avec succès.",
         "addErrorNatureDepenseTitle": "Echec lors de la création du Nature de Dépense",
         "addErrorNatureDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessNatureDepenseTitle": "La Nature de Dépense a été désactivée !",
+        "deleteSuccessNatureDepenseTitle": "La Nature de Dépense a été désactivée",
         "deleteSuccessNatureDepenseMessage": "Vous avez désactivée la Nature de Dépense : {0} avec succès.",
         "deleteErrorNatureDepenseTitle": "Erreur lors de la désactivation de la Nature de Dépense",
         "deleteErrorNatureDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessNatureDepenseTitle": "La Nature de Dépense a été modifiée !",
+        "updateSuccessNatureDepenseTitle": "La Nature de Dépense a été modifiée",
         "updateSuccessNatureDepenseMessage": "Vous avez modifié la Nature de Dépense : {0} avec succès.",
         "updateErrorNatureDepenseTitle": "Echec de la modification de la Nature de Dépense",
         "updateErrorNatureDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Dépense
-        "addSuccessDepenseTitle": "La Dépense a été créée !",
+        "addSuccessDepenseTitle": "La Dépense a été créée",
         "addSuccessDepenseMessage": "Vous avez ajouté la Dépense : {0} avec succès.",
         "addErrorDepenseTitle": "Echec lors de la création du Dépense",
         "addErrorDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessDepenseTitle": "La Dépense a été supprimée !",
+        "deleteSuccessDepenseTitle": "La Dépense a été supprimée",
         "deleteSuccessDepenseMessage": "Vous avez supprimé la Dépense : {0} avec succès.",
         "deleteErrorDepenseTitle": "Erreur lors de la suppression de la Dépense",
         "deleteErrorDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessDepenseTitle": "La Dépense a été modifiée !",
+        "updateSuccessDepenseTitle": "La Dépense a été modifiée",
         "updateSuccessDepenseMessage": "Vous avez modifié la Dépense : {0} avec succès.",
         "updateErrorDepenseTitle": "Echec de la modification de la Dépense",
         "updateErrorDepenseMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Relevebancaire
-        "addSuccessRelevebancaireTitle": "Le Relevé bancaire a été créé !",
+        "addSuccessRelevebancaireTitle": "Le Relevé bancaire a été créé",
         "addSuccessRelevebancaireMessage": "Vous avez ajouté le Relevé bancaire : {0} avec succès.",
         "addErrorRelevebancaireTitle": "Echec lors de la création du Relevé bancaire",
         "addErrorRelevebancaireMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessRelevebancaireTitle": "Le Relevé bancaire a été supprimé !",
+        "deleteSuccessRelevebancaireTitle": "Le Relevé bancaire a été supprimé",
         "deleteSuccessRelevebancaireMessage": "Vous avez supprimé le Relevé bancaire : {0} avec succès.",
         "deleteErrorRelevebancaireTitle": "Erreur lors de la suppression du Relevé bancaire",
         "deleteErrorRelevebancaireMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessRelevebancaireTitle": "Le Relevé bancaire a été modifié !",
+        "updateSuccessRelevebancaireTitle": "Le Relevé bancaire a été modifié",
         "updateSuccessRelevebancaireMessage": "Vous avez modifié le Relevé bancaire : {0} avec succès.",
         "updateErrorRelevebancaireTitle": "Echec de la modification du Relevé bancaire",
         "updateErrorRelevebancaireMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message Barème
-        "addSuccessBaremeTitle": "Le Barème a été créé !",
+        "addSuccessBaremeTitle": "Le Barème a été créé",
         "addSuccessBaremeMessage": "Vous avez ajouté le Barème : {0} avec succès.",
         "addErrorBaremeTitle": "Echec lors de la création du Barème",
         "addErrorBaremeMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessBaremeTitle": "Le Barème a été supprimé !",
+        "deleteSuccessBaremeTitle": "Le Barème a été supprimé",
         "deleteSuccessBaremeMessage": "Vous avez supprimé le Barème : {0} avec succès.",
         "deleteErrorBaremeTitle": "Erreur lors de le suppression du Barème",
         "deleteErrorBaremeMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessBaremeTitle": "Le Barème a été modifié !",
+        "updateSuccessBaremeTitle": "Le Barème a été modifié",
         "updateSuccessBaremeMessage": "Vous avez modifié le Barème : {0} avec succès.",
         "updateErrorBaremeTitle": "Echec de le modification du Barème",
         "updateErrorBaremeMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
         //message KM
-        "addSuccessKMTitle": "Les frais Kms ont été créés !",
+        "addSuccessKMTitle": "Les frais Kms ont été créés",
         "addSuccessKMMessage": "Vous avez ajouté les frais Kms : {0} avec succès.",
         "addErrorKMTitle": "Echec lors de la création des frais Kms",
         "addErrorKMMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessKMTitle": "Les frais Kms ont été supprimés !",
+        "deleteSuccessKMTitle": "Les frais Kms ont été supprimés",
         "deleteSuccessKMMessage": "Vous avez supprimé Les frais Kms : {0} avec succès.",
         "deleteErrorKMTitle": "Erreur lors de la suppression des frais Kms",
         "deleteErrorKMMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessKMTitle": "Les frais Kms ont été modifiés !",
+        "updateSuccessKMTitle": "Les frais Kms ont été modifiés",
         "updateSuccessKMMessage": "Vous avez modifié Les frais Kms : {0} avec succès.",
         "updateErrorKMTitle": "Echec de la modification des frais Kms",
         "updateErrorKMMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
 
         //default message
-        "addSuccessTitle": "Enregistrement réussi!",
+        "addSuccessTitle": "Enregistrement réussi",
         "addSuccessMessage": "L'ajout a été fait avec succès.",
         "addErrorTitle": "Echec de l'enregistrement",
         "addErrorMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "deleteSuccessTitle": "Suppression réussie!",
+        "deleteSuccessTitle": "Suppression réussie",
         "deleteSuccessMessage": "La suppression a été terminée avec succès.",
         "deleteErrorTitle": "Erreur lors de la suppression",
         "deleteErrorMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
         
-        "updateSuccessTitle": "Modification réussie!",
+        "updateSuccessTitle": "Modification réussie",
         "updateSuccessMessage": "La modification a été terminée avec succès.",
         "updateErrorTitle": "Echec de la modification",
         "updateErrorMessage": "L'erreur suivante a été rencontrée :<br/>{0}",
@@ -182,6 +182,10 @@
                     { "id": 3, "name": 'Carte bancaire' },
                     { "id": 4, "name": 'Liquide' },
                     { "id": 5, "name": 'Occupation personnelle' }],
+    "modePaymentSpend": [{ "id": 1, "name": "Chéque" },
+                    { "id": 2, "name": "Virement" },
+                    { "id": 3, "name": 'Carte bancaire' },
+                    { "id": 4, "name": 'Liquide' }],
     
     "typeRecipes": [{ "id": 2, "name": "Loyers" },
                     { "id": 1, "name": "Autres recettes" },                    
@@ -189,6 +193,9 @@
                      
     "typeSpend"  : [{ "id": 1, "name": "Autres dépenses" },
                     { "id": 2, "name": "Remboursement location" }],
+    
+    "typeMontant"  : [{ "id": 1, "name": "Positive (+)" },
+                    { "id": 2, "name": "Négative (-)" }],
 
     "typeTrajet": [{ "id": 1, "name": "Trajet Aller" },
                     { "id": 2, "name": "Trajet A-R" }], 

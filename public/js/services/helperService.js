@@ -288,13 +288,16 @@
                             case 'Libellé/Opérations':
                                 transaction.title = line[headername];
                                 break;
+                            case 'Moyen de paiement':
+                                transaction.modePayment = line[headername];
+                                break;
                             case 'Crédit':
                                 if (HelperService.xlsNumberToFloat(line[headername])) {
                                     transaction.amount = HelperService.xlsNumberToFloat(line[headername]);
                                     if (transaction.type !== undefined) { //means we have a line with an amount in both credit and debit column, skip this line
                                         transaction.isNotValid = true;
                                         break;
-                                    }                                        ;
+                                    };
                                     transaction.type = "Crédit";
                                 }
                                 break;
@@ -304,12 +307,12 @@
                                     if (transaction.type !== undefined) { //means we have a line with an amount in both credit and debit column, skip this line
                                         transaction.isNotValid = true;
                                         break;
-                                    }                                        ;
+                                    };
                                     transaction.type = "Débit";
                                 }
                                 break;
                             case 'Date':
-                                transaction.date = line[headername];
+                                transaction.date = new Date(line[headername]);
                                 break;
                             default:
                                 break;
@@ -472,15 +475,17 @@
             var totalKms = 0, totalMontant = 0;
             for (var obj in listkm) {
                 var ligne = { 'date': '', 'libelle' : '', 'kms': 0, 'taux': 0, 'montant': 0 };          
-                if (listkm[obj].date.month === i) {                    
+                if (listkm[obj].date.month === i+1) {                    
                     totalKms = Math.round((totalKms + listkm[obj].km) * 100) / 100;              
                     totalMontant = Math.round((totalMontant + listkm[obj].amount) * 100) / 100;
-                    var str = new Date(listkm[obj].date_travel);
-                    ligne.date = str.getMonth() + 1 + '/' + str.getDate();
+                    ligne.date = new Date(listkm[obj].date_travel);
                     ligne.kms = listkm[obj].km;
                     ligne.montant = listkm[obj].amount;
                     ligne.taux = listkm[obj].taux;
-                    ligne.libelle = listkm[obj].start_place + ' => ' + listkm[obj].finish_place;
+                    if(listkm[obj].trajet === 1)
+                        ligne.libelle = listkm[obj].start_place + ' ==> ' + listkm[obj].finish_place;
+                    else
+                        ligne.libelle = listkm[obj].start_place + ' <==> ' + listkm[obj].finish_place;
                     dashboard.push(ligne);
                 }               
             }
@@ -537,6 +542,19 @@
         }
         compteurPiece++;
         return compteurPiece;
+    };
+    
+    _helperService.getCurrentDays = function (year, month) {
+        // Get number of days based on month + year 
+        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
+        var nbDays = new Date(year, month, 0).getDate() || 31;
+        
+        var daysList = [];
+        for (var i = 1; i <= nbDays; i++) {
+            var iS = i.toString();
+            daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
+        };
+        return daysList;
     };
     
     _helperService.getCurrentState = function (list) {

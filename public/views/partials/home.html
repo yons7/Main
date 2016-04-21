@@ -17,18 +17,11 @@
             <div class="col-lg-12">
                 <div class="spinner-container-panel" ng-show="isLoadingBankStatements || isLoadingScales"><span us-spinner spinner-theme="easy16i-panel"></span></div>
 
-                <div class="alert alert-warning" ng-if="!isScale" ng-hide="isLoadingBankStatements || isLoadingScales">
+                <div class="alert alert-warning" ng-hide="isLoadingBankStatements || isLoadingScales">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <i class="fa fa-exclamation-circle"></i>  <strong>Paramétres des Véhicules</strong> pour l'année civile {{currentDate.year}} ne sont pas configurés. Pour les configurer merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétres Des Taux Automobiles </a>
+                    <i class="fa fa-exclamation-circle"></i>  <strong>Les paramètres des véhicules</strong> pour l'année civile {{currentDate.year}} seront configurés en mars à parution au bulletin officiel des impôts. Une fois configurés,vous pourrez entrer vos kilomètres sur les mois de janvier, février mars et suivants.
                 </div>
-                <div class="alert alert-success" ng-if="isScale" ng-hide="isLoadingBankStatements || isLoadingScales">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <i class="fa fa-hand-peace-o"></i>  <strong>Paramétres des Véhicules</strong> pour l'année civile {{currentDate.year}} sont configurés. Pour consulter les barèmes merci de suivre le lien suivant : <a href="#{{config.routes.scales.RouteUrl}}"> Paramétres Des Taux Automobiles </a>
-                </div>
-                <div class="alert alert-info" ng-if="!isScale && role==1">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    Aller chercher le tarif frais kilométrique sur <a href="https://www.service-public.fr/">Service-Public.fr</a>, Déduction des frais réels : les barèmes kilométriques
-                </div>
+
             </div>
         </div>
         <!-- /.row -->

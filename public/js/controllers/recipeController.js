@@ -13,24 +13,13 @@
 
     $scope.$on('DateChange', function (events, args) {
         $scope.num = undefined;
-        $scope.getCurrentDays();
+        $scope.daysList = HelperService.getCurrentDays($rootScope.currentDate.year, $rootScope.currentDate.month);
         $scope.getCurrentState();
         $scope.listRecipe();
  
     });
     
-    $scope.getCurrentDays = function () {       
-        // Get number of days based on month + year 
-        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
-        var nbDays = new Date($rootScope.currentDate.year, $rootScope.currentDate.month, 0).getDate() || 31;
-        
-        $scope.daysList = [];
-        for (var i = 1; i <= nbDays; i++) {
-            var iS = i.toString();
-            $scope.daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
-        }
-    };
-    $scope.getCurrentDays();
+    $scope.daysList = HelperService.getCurrentDays($rootScope.currentDate.year, $rootScope.currentDate.month);
 
     $scope.getCurrentState = function () {
         $scope.isLoadingCurrentState = true;
@@ -61,6 +50,22 @@
         selectedOption: Ressources.typeRecipes[0],
         availableOptions: Ressources.typeRecipes
     };
+    
+    $scope.CheckOccupationPayment = function () {
+        if ($scope.paymentRadio.selectedOption.id === 5) {
+            $scope.recipeRadio.selectedOption = Ressources.typeRecipes[2];
+        } else if ($scope.paymentRadio.selectedOption.id !== 5 && $scope.recipeRadio.selectedOption.id === 3) {
+            $scope.recipeRadio.selectedOption = Ressources.typeRecipes[0];
+        }
+    }
+    
+    $scope.CheckOccupationRecipe = function () {
+        if ($scope.recipeRadio.selectedOption.id === 3) {
+            $scope.paymentRadio.selectedOption = Ressources.modePayment[4];
+        } else if ($scope.recipeRadio.selectedOption.id !== 3 && $scope.paymentRadio.selectedOption.id === 5) {
+            $scope.paymentRadio.selectedOption = Ressources.modePayment[0];
+        }
+    }
     
     $scope.selecteditem = undefined;
     var compteurPiece = 1;
@@ -130,13 +135,37 @@
         }
     }
     
+    //$scope.deleteRecipe = function (Object) {
+    //    var recipe = new ApiService.Recipe();
+    //    recipe.$delete({ params: { 'idList' : [].concat(Object._id) } }, function (res) {
+    //        HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.num_justification);
+    //        $scope.listRecipe();
+    //    }, function (err) {
+    //        HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
+    //    });
+    //}
+    
     $scope.deleteRecipe = function (Object) {
-        var recipe = new ApiService.Recipe();
-        recipe.$delete({ params: { 'idList' : [].concat(Object._id) } }, function (res) {
-            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.num_justification);
+        var recipe = new ApiService.Recipe(Object);
+        recipe.deleted = 1;
+        Object.isBeingModified = true;
+        recipe.$update(function (res) {
+            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.name);
             $scope.listRecipe();
         }, function (err) {
             HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
+        });
+    }
+    
+    $scope.UndoDeleteRecipe = function (Object) {
+        var recipe = new ApiService.Recipe(Object);
+        recipe.deleted = 0;
+        Object.isBeingModified = true;
+        recipe.$update(function (res) {
+            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.update, res.message.name);
+            $scope.listRecipe();
+        }, function (err) {
+            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.update, err.data.errormessage);
         });
     }
     
@@ -187,8 +216,8 @@
     
 
     $scope.dialogHtml = {
-        title: 'Validation de transfert des piéces justificatif des recettes',
-        body: 'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
+        title: 'Validation du transfert des pièces justificatives de recettes',
+        body: 'Confirmer le transfert de la pièce justificative sur le mois prochain (car pas sur le relevé bancaire du mois)',
         info:  'NB : cette opération est irréversible'
     }    
     

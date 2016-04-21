@@ -13,22 +13,35 @@
     
     $scope.$on('DateChange', function (events, args) {
         $scope.num = undefined;
-        $scope.getCurrentDays();
+        $scope.daysList = HelperService.getCurrentDays($rootScope.currentDate.year, $rootScope.currentDate.month);
         $scope.listKm(); 
     })
     
-    $scope.getCurrentDays = function () {
-        // Get number of days based on month + year 
-        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
-        var nbDays = new Date($rootScope.currentDate.year, $rootScope.currentDate.month, 0).getDate() || 31;
-        
-        $scope.daysList = [];
-        for (var i = 1; i <= nbDays; i++) {
-            var iS = i.toString();
-            $scope.daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
-        }
-    };
-    $scope.getCurrentDays();
+    $scope.daysList = HelperService.getCurrentDays($rootScope.currentDate.year, $rootScope.currentDate.month);
+    
+    $scope.deleteKm = function (Object) {
+        var km = new ApiService.Km(Object);
+        km.deleted = 1;
+        Object.isBeingModified = true;
+        km.$update(function (res) {
+            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.name);
+            $scope.listKm();
+        }, function (err) {
+            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
+        });
+    }
+    
+    $scope.UndoDeleteKm = function (Object) {
+        var km = new ApiService.Km(Object);
+        km.deleted = 0;
+        Object.isBeingModified = true;
+        km.$update(function (res) {
+            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.update, res.message.name);
+            $scope.listKm();
+        }, function (err) {
+            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.update, err.data.errormessage);
+        });
+    }
     
     $scope.trajetRadio = {
         selectedOption: Ressources.typeTrajet[0],
@@ -126,15 +139,15 @@
         }
     }
     
-    $scope.deleteKm = function (Object) {
-        var km = new ApiService.Km();
-        km.$delete({ params: { 'idList' : [].concat(Object._id) } }, function (res) {
-            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.num_justification);
-            $scope.listKm();
-        }, function (err) {
-            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
-        });
-    }
+    //$scope.deleteKm = function (Object) {
+    //    var km = new ApiService.Km();
+    //    km.$delete({ params: { 'idList' : [].concat(Object._id) } }, function (res) {
+    //        HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.num_justification);
+    //        $scope.listKm();
+    //    }, function (err) {
+    //        HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
+    //    });
+    //}
     
     $scope.starEditKm = function (Object) {
         $scope.changePage();
@@ -152,8 +165,8 @@
 
     
     $scope.dialogHtml = {
-        title: 'Validation de transfert des piéces justificatif des frais kilométriques',
-        body:  'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
+        title: 'Validation du transfert des pièces justificatives de frais kilométriques',
+        body:  'Confirmer le transfert de la pièce justificative sur le mois prochain (car pas sur le relevé bancaire du mois)',
         info:  'NB : cette opération est irréversible'
     }   
 

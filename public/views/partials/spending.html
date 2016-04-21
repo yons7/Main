@@ -111,7 +111,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="montant">Montant (€) : </label> Entrer les montants des centimes grâce à l'ascenseur ^ ou saisissez une virgule (et pas un point)
-                                    <input class="form-control" type="number" name="montant" id="montant" step="0.01" min="0" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'">
+                                    <input ng-if="spendRadio.selectedOption.id==1 && selectedNature.signe===2" class="form-control" type="number" name="montant" id="montant" step="0.01" max="0" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'">
+                                    <input ng-if="!(spendRadio.selectedOption.id==1 && selectedNature.signe===2)" class="form-control" type="number" name="montant" id="montant" step="0.01" min="0" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'">
                                 </div>
 
                             </div>
@@ -146,7 +147,7 @@
                                             <div class="spinner-container-input" ng-show="isLoadingSpendingNature"><span us-spinner spinner-theme="easy16i-input"></span></div>
                                         </div>
                                         <div class="form-group" ng-if="role==1">
-                                            <p>Si votre Nature de Dépense n'existe pas dans la liste ci-dessus, vous pouvez l'ajouter ici: <a href="#{{config.routes.natureSpending.RouteUrl}}">Gestion Des Nature de Dépense</a>.</p>
+                                            <p>Si votre Nature de Dépense n'existe pas dans la liste ci-dessus, vous pouvez l'ajouter ici: <a href="#{{config.routes.natureSpending.RouteUrl}}">Gestion Des Nature de Dépenses</a>.</p>
                                         </div>
                                     </div>
 
@@ -215,7 +216,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="param in displayedSpendingList">
+                                <tr ng-repeat="param in displayedSpendingList" ng-class="param.deleted === 1 ? 'ng-scope danger greyedOut' : 'ng-scope';">
                                     <td ng-hide="checkState()">
 
                                         <button type="button" class="btn btn-sm btn-warning"
@@ -226,8 +227,8 @@
 
                                     </td>
                                     <td>{{param.num_justification}}</td>
-                                    <td>{{param.dateachat | date}}</td>                                 
-                                    <td>{{param.gite.name +'  '+ param.gite.city +'-'+ param.gite.country}}</td>                                   
+                                    <td>{{param.dateachat | date}}</td>
+                                    <td>{{param.gite.name +'  '+ param.gite.city +'-'+ param.gite.country}}</td>
                                     <td>{{param.spend == 1 ? param.description.nature :"Remboursement location"}}</td>
                                     <td>{{param.amount | currency}}</td>
                                     <td>{{param.spend == 1 ? "Fournisseur : " + param.description.provider_name : "Locataire : " + param.information.tenant_name + " / Date Départ : " + (param.information.star_date | date) + " / " + param.information.rental_time +" jour(s)"}}</td>
@@ -235,9 +236,9 @@
                                         {{paymentRadio.availableOptions[param.modePayment-1].name}}
                                     </td>
                                     <td ng-hide="checkState()">
-                                        <div class="pull-right">
-                                            <div confirm-delete-inline on-confirm="deleteSpending(param)" on-start-edit="starEditSpending(param)" allow-edit="true"></div>
-                                        </div>
+                                        <div confirm-delete-inline on-confirm="deleteSpending(param)" on-start-edit="starEditSpending(param)" allow-edit="true" ng-hide="param.deleted===1 || param.isBeingModified"></div>
+                                        <div confirm-undo-inline on-confirm="UndoDeleteSpending(param)" ng-hide="param.isBeingModified || param.deleted!==1"></div>
+                                        <div class="spinner-container-input" ng-show="param.isBeingModified" style="width: 34px;"><span us-spinner spinner-theme="easy16i-input"></span></div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -259,17 +260,17 @@
                         <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                             <button type="button" class="btn btn-xs btn-warning">
                                 <i class="fa fa-share"></i>
-                            </button>  Déplacer la justification au mois suivant
+                            </button>  Déplacer la pièce justificative au mois suivant
                         </div>
                         <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                             <button type="button" class="btn btn-xs btn-primary startEditBtn">
                                 <i class="fa fa-edit"></i>
-                            </button>  Modifier la justification
+                            </button>  Modifier la pièce  justificative
                         </div>
                         <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                             <button type="button" class="btn btn-xs btn-danger">
                                 <i class="fa fa-trash"></i>
-                            </button>  Supprimer la justification
+                            </button>  Supprimer la pièce justificative
                         </div>
                     </div>
                 </div>

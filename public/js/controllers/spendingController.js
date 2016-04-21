@@ -13,23 +13,37 @@
     
     $scope.$on('DateChange', function (events, args) {
         $scope.num = undefined;
-        $scope.getCurrentState();
-        $scope.getCurrentDays();
+        $scope.getCurrentState();       
+        $scope.daysList = HelperService.getCurrentDays($rootScope.currentDate.year, $rootScope.currentDate.month);
         $scope.listSpending();
     });
     
-    $scope.getCurrentDays = function () {
-        // Get number of days based on month + year 
-        // (January = 31, February = 28, April = 30, February 2000 = 29) or 31 if no month selected yet
-        var nbDays = new Date($rootScope.currentDate.year, $rootScope.currentDate.month, 0).getDate() || 31;
-        
-        $scope.daysList = [];
-        for (var i = 1; i <= nbDays; i++) {
-            var iS = i.toString();
-            $scope.daysList.push((iS.length < 2) ? '0' + iS : iS); // Adds a leading 0 if single digit
-        }
-    };
-    $scope.getCurrentDays();
+    
+    $scope.daysList = HelperService.getCurrentDays($rootScope.currentDate.year, $rootScope.currentDate.month);
+    
+    $scope.deleteSpending = function (Object) {
+        var spending = new ApiService.Spending(Object);
+        spending.deleted = 1;
+        Object.isBeingModified = true;
+        spending.$update(function (res) {
+            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.name);
+            $scope.listSpending();
+        }, function (err) {
+            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
+        });
+    }
+    
+    $scope.UndoDeleteSpending = function (Object) {
+        var spending = new ApiService.Spending(Object);
+        spending.deleted = 0;
+        Object.isBeingModified = true;
+        spending.$update(function (res) {
+            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.update, res.message.name);
+            $scope.listSpending();
+        }, function (err) {
+            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.update, err.data.errormessage);
+        });
+    }
     
     $scope.getCurrentState = function () {
         $scope.isLoadingCurrentState = true;
@@ -46,10 +60,10 @@
         return !($scope.currentBankStatement && ($scope.currentBankStatement.status === -1 || $scope.currentBankStatement.status === 0 || $scope.currentBankStatement.status === 1));
     }
     
-    var modePayment = Ressources.modePayment[0];
+    var modePayment = Ressources.modePaymentSpend[0];
     $scope.paymentRadio = {
         selectedOption: modePayment,
-        availableOptions: Ressources.modePayment
+        availableOptions: Ressources.modePaymentSpend
     };
     
     
@@ -158,15 +172,15 @@
         });
     }
     
-    $scope.deleteSpending = function (Object) {
-        var spending = new ApiService.Spending();
-        spending.$delete({ params: { 'idList' : [].concat(Object._id) } }, function (res) {
-            HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.num_justification);
-            $scope.listSpending();
-        }, function (err) {
-            HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
-        });
-    }
+    //$scope.deleteSpending = function (Object) {
+    //    var spending = new ApiService.Spending();
+    //    spending.$delete({ params: { 'idList' : [].concat(Object._id) } }, function (res) {
+    //        HelperService.displayNotification(Ressources.enums.notification.success, $scope.name , Ressources.enums.operation.delete, res.message.num_justification);
+    //        $scope.listSpending();
+    //    }, function (err) {
+    //        HelperService.displayNotification(Ressources.enums.notification.error, $scope.name , Ressources.enums.operation.delete, err.data.errormessage);
+    //    });
+    //}
     
     $scope.starEditSpending = function (Object) {
         $scope.changePage();
@@ -192,8 +206,8 @@
     
     
     $scope.dialogHtml = {
-        title: 'Validation de transfert des piéces justificatif des dépenses',
-        body: 'Vous étes sur de vouloir conserver la pièce justificative jusqu\'au mois prochain ?',
+        title: 'Validation du transfert des pièces justificatives de dépenses',
+        body: 'Confirmer le transfert de la pièce justificative sur le mois prochain (car pas sur le relevé bancaire du mois)',
         info: 'NB : cette opération est irréversible'
     }   
     

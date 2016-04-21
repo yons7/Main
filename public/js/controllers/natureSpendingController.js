@@ -1,6 +1,11 @@
 ﻿myApp.controller("NatureSpendingCtrl", function ($scope, $rootScope, ApiService, Ressources, HelperService, PersistentDataService, config) {
     $scope.name = "NatureDepense";
     
+    $scope.montantRadio = {
+        selectedOption: Ressources.typeMontant[0],
+        availableOptions: Ressources.typeMontant
+    };
+
     $scope.createUpdateNatureSpending = function (Object) {
         this.natureSpendingCreationForm.reset();
         var natureSpending = new ApiService.NatureSpending(Object);
@@ -22,7 +27,7 @@
             });
         }
     }
-    
+
     $scope.deleteNatureSpending = function (Object) {
         var natureSpending = new ApiService.NatureSpending(Object);
         natureSpending.deleted = 1;
@@ -62,6 +67,7 @@
     $scope.reset = function () {
         this.natureSpendingCreationForm.reset();
         $scope.selecteditem = undefined;
+        $scope.montantRadio.selectedOption = Ressources.typeMontant[0];
     }
     
     $scope.listNatureSpendings();
@@ -74,6 +80,7 @@
     $scope.starEditNatureSpending = function (Object) {
         $scope.selecteditem = Object;
         $scope.natureName = $scope.selecteditem.name;
+        $scope.montantRadio.selectedOption.id = $scope.selecteditem.signe;
         $scope.desc = $scope.selecteditem.description !== undefined ? $scope.selecteditem.description : undefined;
         $scope.deleted = $scope.selecteditem.deleted;
     }

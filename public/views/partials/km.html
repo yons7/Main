@@ -153,11 +153,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="param in displayedKmList">
+                                    <tr ng-repeat="param in displayedKmList" ng-class="param.deleted === 1 ? 'ng-scope danger greyedOut' : 'ng-scope';">
                                         <td>
                                             <button type="button" class="btn btn-sm btn-warning"
                                                     modal-dialog dg-title="dialogHtml.title" dg-body="dialogHtml.body" dg-info="dialogHtml.info"
-                                                    on-confirm="toNextMonth(param)" dg-Id="param._id">
+                                                    on-confirm="toNextMonth(param)" dg-id="param._id">
                                                 <i class="fa fa-share"></i>
                                             </button>
                                         </td>
@@ -166,11 +166,11 @@
                                         <td>{{param.vehicle.immatriculation +'  '+ param.vehicle.type +' ('+ param.vehicle.cv +')'}}</td>
                                         <td>{{param.date_travel | date}}</td>
                                         <td>{{param.montant}}</td>
-                                        <td>{{trajetRadio.availableOptions[param.trajet-1].name + ' : ' + param.km + ' Km ' + param.start_place + ' => ' + param.finish_place}}</td>
+                                        <td>{{trajetRadio.availableOptions[param.trajet-1].name + ' : ' + param.km + ' Km ' + param.start_place + ' => ' + param.finish_place}}</td>  
                                         <td>
-                                            <div class="pull-right">
-                                                <div confirm-delete-inline on-confirm="deleteKm(param)" on-start-edit="starEditKm(param)" allow-edit="true"></div>
-                                            </div>
+                                            <div confirm-delete-inline on-confirm="deleteKm(param)" on-start-edit="starEditKm(param)" allow-edit="true" ng-hide="param.deleted===1 || param.isBeingModified"></div>
+                                            <div confirm-undo-inline on-confirm="UndoDeleteKm(param)" ng-hide="param.isBeingModified || param.deleted!==1"></div>
+                                            <div class="spinner-container-input" ng-show="param.isBeingModified" style="width: 34px;"><span us-spinner spinner-theme="easy16i-input"></span></div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -192,17 +192,17 @@
                             <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                                 <button type="button" class="btn btn-xs btn-warning">
                                     <i class="fa fa-share"></i>
-                                </button>  Déplacer la justification au mois suivant
+                                </button>  Déplacer la pièce justificative au mois suivant
                             </div>
                             <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                                 <button type="button" class="btn btn-xs btn-primary startEditBtn">
                                     <i class="fa fa-edit"></i>
-                                </button>  Modifier la justification
+                                </button>  Modifier la pièce  justificative
                             </div>
                             <div class="form-group" ng-hide="displayedRecipeList.length === 0">
                                 <button type="button" class="btn btn-xs btn-danger">
                                     <i class="fa fa-trash"></i>
-                                </button>  Supprimer la justification
+                                </button>  Supprimer la pièce justificative
                             </div>
                         </div>
                     </div>

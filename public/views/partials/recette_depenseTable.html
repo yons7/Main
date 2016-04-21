@@ -56,7 +56,7 @@
                                         <td><strong>{{ligne.month | capitalize}}</strong></td>
                                         <td>{{ligne.recipe !== 0 ? (ligne.recipe | currency) : null}}</td>
                                         <td>{{ligne.spending !== 0 ? (ligne.spending | currency): null}}</td>
-                                        <td>{{ligne.diff !== 0 ? (ligne.diff | number:2) : null}}</td>
+                                        <td>{{ligne.diff !== 0 ? (ligne.diff | currency) : null}}</td>
                                     </tr>
                                 </tbody>
                             </table>

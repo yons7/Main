@@ -59,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="ligne in dashboard">
-                                        <td>{{ligne.date}}</td>
+                                        <td>{{ligne.date | date : 'dd'}}</td>
                                         <td>{{ligne.libelle}}</td>
                                         <td>{{ligne.kms}}</td>
                                         <td>{{ligne.taux}}</td>
