@@ -78,7 +78,7 @@
                                                                                                                                                                 'information'         : {
                                                                                                                                                                                         'tenant_name': this.nomLoc,
                                                                                                                                                                                         'rental_time' : this.periode,
-                                                                                                                                                                                        'star_date' : currentDate.month +'/'+ this.day +'/'+ currentDate.year,
+                                                                                                                                                                                        'star_date' : spendRadio.selectedOption.id==2 ? (currentDate.month +'/'+ this.day +'/'+ currentDate.year) : undefined,
                                                                                                                                                                                         'reason_rembourssement': this.motif
                                                                                                                                                                                     }
                                                                                                                                                             })">
@@ -111,8 +111,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="montant">Montant (€) : </label> Entrer les montants des centimes grâce à l'ascenseur ^ ou saisissez une virgule (et pas un point)
-                                    <input ng-if="spendRadio.selectedOption.id==1 && selectedNature.signe===2" class="form-control" type="number" name="montant" id="montant" step="0.01" max="0" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'">
-                                    <input ng-if="!(spendRadio.selectedOption.id==1 && selectedNature.signe===2)" class="form-control" type="number" name="montant" id="montant" step="0.01" min="0" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'">
+                                    <input class="form-control" type="number" name="montant" id="montant" step="0.01" placeholder="Saisir le montant de dépense.." ng-model="montant" required required-message="'{{validationMessages.requiredMessage}}'" invalid-message="'{{validationMessages.invalide}}'" validator="((spendRadio.selectedOption.id==1 && selectedNature.signe===2 && this.montant < 0)|| (!(spendRadio.selectedOption.id==1 && selectedNature.signe===2) && this.montant > 0))" validate-on="dirty">
                                 </div>
 
                             </div>

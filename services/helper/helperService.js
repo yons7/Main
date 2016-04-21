@@ -6,7 +6,7 @@
             res.status(status);
         }
        res.json(responseObj);
-      // setTimeout((function () { res.json(responseObj); }), 1000);
+       //setTimeout((function () { res.json(responseObj); }), 1000);
     },
 
     validation: {
@@ -33,8 +33,7 @@
                      obj.modePayment !== undefined && obj.spend !== undefined && obj.gite !== undefined && obj.amount !== undefined)
         },
         isValidNatureSpending: function (obj) {
-            return ((obj !== undefined && obj.name !== undefined && (obj.min === undefined || obj.max === undefined)) || 
-                    (obj !== undefined && obj.name !== undefined && obj.min !== undefined && obj.max !== undefined && obj.max >= obj.min))
+            return (obj !== undefined && obj.name !== undefined && obj.signe !== undefined)
         },
         isValidRecipe : function (obj) {
             return (obj !== undefined && obj.date !== undefined && obj.date.year !== undefined &&
