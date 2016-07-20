@@ -70,7 +70,7 @@
 
                             <table st-table="displayedStatementLineList" st-safe-src="selectedSheet" class="table table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr ng-if="isEnabled">
                                         <form id="headerSelectionForm" class="form-horizontal">
                                             <div class="form-group">
                                                 <th ng-repeat="header in selectedSheet.colHeaders">
@@ -156,18 +156,18 @@
                             <table st-table="displayedCurrentBankStatement" st-safe-src="currentBankStatement.transactions" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Date d'opération</th>
-                                        <th>Libellé</th>
                                         <th>Moyen de paiement</th>
+                                        <th>Date d'opération</th>
+                                        <th>Libellé</th>                                     
                                         <th>Débit</th>
                                         <th>Crédit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="line in displayedCurrentBankStatement">
-                                        <td>{{line.date | date}}</td>
-                                        <td>{{line.title}}</td>
                                         <td>{{line.modePayment}}</td>
+                                        <td>{{line.date | date}}</td>
+                                        <td>{{line.title}}</td>                                       
                                         <td>{{(line.type ==='Débit') ? line.amount : null}}</td>
                                         <td>{{(line.type ==='Crédit') ? line.amount : null}}</td>
                                     </tr>

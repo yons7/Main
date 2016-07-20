@@ -38,7 +38,7 @@
                                     ligne.color = 'yellow';
                                     break;
                                 case 3:
-                                    ligne.etat = 'Exercice cloturé';
+                                    ligne.etat = 'Exercice cloturer';
                                     ligne.color = 'green';
                                     break;
                                 default:

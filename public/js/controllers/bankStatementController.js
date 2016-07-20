@@ -2,12 +2,14 @@
     $scope.name = "Relevebancaire";
     $scope.columnList = {
         availableOptions: [{ id: '0', name: '' },
-                                { id: '1', name: 'Libellé/Opérations' },
-                                { id: '2', name: 'Crédit' },
-                                { id: '3', name: 'Débit' },
-                                { id: '4', name: 'Date' },
-                                { id: '5', name: 'Moyen de paiement' }]
+            { id: '1', name: 'Libellé/Opérations' },
+            { id: '2', name: 'Crédit' },
+            { id: '3', name: 'Débit' },
+            { id: '4', name: 'Date' },
+            { id: '5', name: 'Moyen de paiement' }]
     };
+    
+    $scope.isEnabled = false;
     
     $scope.$on('DateChange', function (events, args) {
         $scope.getCurrentBankStatement();
@@ -64,7 +66,23 @@
                 $scope.sheetList = Object.keys(resultJSON);
             
             $scope.selectedSheet = resultJSON[$scope.sheetList[0]];
-            updateSheetDisplay();
+            var isValid = true;
+            for (var sheet in $scope.selectedSheet) {
+                if ($scope.selectedSheet[sheet].Date !== undefined) {
+                    var date = new Date($scope.selectedSheet[sheet].Date);
+                    $scope.selectedSheet[sheet].Date = date.toLocaleDateString();
+                    if (date.getFullYear() !== $rootScope.currentDate.year || date.getMonth() !== $rootScope.currentDate.month - 1) {
+                        isValid = false;
+                        break;
+                    }
+                }                
+            }
+            if (isValid) {
+                updateSheetDisplay();
+            } else {
+                $scope.sheetList = undefined;
+                $scope.selectedSheet = undefined;
+            }
         });
     };
     var updateSheetDisplay = function () {
@@ -247,14 +265,14 @@
     $scope.dosth = function () {
         if ($scope.selectedSheet){
             $scope.messages = HelperService.constructBankStatement($rootScope.currentDate, $scope.selectedSheet, $scope.columnList.availableOptions);
-    
-            $q.when($scope.messages !== undefined).then(function (response){ 
+            
+            $q.when($scope.messages !== undefined).then(function (response){
                 $scope.dialogHtml = {
                     title: 'Vérification du solde de fin du mois.',
                     body: HelperService.stringFormat('Merci de vérifier que le <strong>solde de fin du mois</strong> sur votre relevé bancaire correspond bien à <strong>{0}</strong>.', $scope.messages.endbalance) ,
                     info: 'Si les montants ne sont pas identiques, il se peut qu\'il manque des opérations sur le relevé bancaire que vous essayer d\'importer.',
                     id: 'bankModel'
-                };          
+                };
             })
         }
     };
